@@ -5,13 +5,14 @@ import { usePathname } from 'next/navigation'
 import {
   Users, BookOpen, Mic2, FileText, Lightbulb,
   Search, BarChart3, TrendingUp, Megaphone, LayoutDashboard,
-  Zap
+  Zap, Flame
 } from 'lucide-react'
 
 const navItems = [
   { href: '/dashboard', label: 'Dashboard', icon: LayoutDashboard },
   { href: '/clients', label: 'Clientes', icon: Users },
   { divider: true, label: 'Módulos de IA' },
+  { href: '/tagline', label: 'Posicionamiento & Tagline', icon: Flame },
   { href: '/storybrand', label: 'StoryBrand Builder', icon: BookOpen },
   { href: '/voice', label: 'Brand Voice & Tono', icon: Mic2 },
   { href: '/scripts', label: 'Guionista Viral', icon: FileText },
