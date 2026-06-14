@@ -1,7 +1,8 @@
 'use client'
 
-import { useState } from 'react'
-import { BookOpen, Sparkles, Copy, ChevronRight, Check, Loader2 } from 'lucide-react'
+import { useState, useEffect } from 'react'
+import { BookOpen, Sparkles, Copy, ChevronRight, Check, Loader2, Save } from 'lucide-react'
+import { supabase } from '@/lib/supabase'
 
 const STEPS = [
   { id: 1, title: 'El Héroe', subtitle: '¿Quién es tu cliente ideal y qué quiere?' },
@@ -23,6 +24,10 @@ const OUTPUTS: { id: OutputType; label: string; desc: string }[] = [
 ]
 
 export default function StoryBrandPage() {
+  const [clients, setClients] = useState<{id: string, name: string}[]>([])
+  const [clientId, setClientId] = useState('')
+  const [saving, setSaving] = useState(false)
+  const [saved, setSaved] = useState(false)
   const [step, setStep] = useState(1)
   const [form, setForm] = useState({
     hero_name: '', hero_wants: '',
@@ -40,6 +45,37 @@ export default function StoryBrandPage() {
   const [activeOutput, setActiveOutput] = useState<OutputType>('one_liner')
   const [copied, setCopied] = useState(false)
 
+  useEffect(() => {
+    supabase.from('clients').select('id, name').order('created_at').then(({ data }) => {
+      if (data) setClients(data)
+    })
+  }, [])
+
+  useEffect(() => {
+    if (!clientId) return
+    supabase.from('storybrand').select('*').eq('client_id', clientId).single().then(({ data }) => {
+      if (data) {
+        setForm(f => ({ ...f, ...data }))
+        setOutput({ one_liner: data.one_liner || '', brandscript: data.brandscript || '', website_copy: data.website_copy || '', email_sequence: data.email_sequence || '' })
+      }
+    })
+  }, [clientId])
+
+  const saveToSupabase = async (updatedOutput: Record<OutputType, string>) => {
+    if (!clientId) return
+    setSaving(true)
+    const payload = { client_id: clientId, ...form, ...updatedOutput, updated_at: new Date().toISOString() }
+    const { data: existing } = await supabase.from('storybrand').select('id').eq('client_id', clientId).single()
+    if (existing) {
+      await supabase.from('storybrand').update(payload).eq('client_id', clientId)
+    } else {
+      await supabase.from('storybrand').insert([payload])
+    }
+    setSaving(false)
+    setSaved(true)
+    setTimeout(() => setSaved(false), 2000)
+  }
+
   const update = (field: string, value: string) => setForm(f => ({ ...f, [field]: value }))
 
   const generate = async (action: OutputType) => {
@@ -52,7 +88,9 @@ export default function StoryBrandPage() {
         body: JSON.stringify({ action: `generate_${action}`, data: form }),
       })
       const data = await res.json()
-      setOutput(o => ({ ...o, [action]: data.result }))
+      const updated = { ...output, [action]: data.result }
+      setOutput(updated)
+      await saveToSupabase(updated)
     } catch (e) {
       console.error(e)
     } finally {
@@ -171,6 +209,17 @@ export default function StoryBrandPage() {
         <p style={{ color: '#9494aa', fontSize: 14, margin: 0 }}>
           Construye el framework de 7 elementos. Genera BrandScript, One-Liner, copy web y emails automáticamente.
         </p>
+      </div>
+
+      {/* Client selector */}
+      <div className="card-dark" style={{ padding: 16, marginBottom: 24, display: 'flex', alignItems: 'center', gap: 12 }}>
+        <label style={{ fontSize: 13, color: '#9494aa', whiteSpace: 'nowrap' }}>Cliente:</label>
+        <select value={clientId} onChange={e => setClientId(e.target.value)} style={{ flex: 1 }}>
+          <option value="">— Selecciona un cliente —</option>
+          {clients.map(c => <option key={c.id} value={c.id}>{c.name}</option>)}
+        </select>
+        {saving && <span style={{ fontSize: 12, color: '#9494aa', display: 'flex', alignItems: 'center', gap: 4 }}><Loader2 size={12} /> Guardando...</span>}
+        {saved && <span style={{ fontSize: 12, color: '#10b981', display: 'flex', alignItems: 'center', gap: 4 }}><Check size={12} /> Guardado</span>}
       </div>
 
       <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 24 }}>
