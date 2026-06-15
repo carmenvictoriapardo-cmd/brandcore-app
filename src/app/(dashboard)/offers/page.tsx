@@ -1,10 +1,15 @@
 'use client'
 
-import { useState } from 'react'
-import { Lightbulb, Sparkles, Loader2 } from 'lucide-react'
+import { useState, useEffect } from 'react'
+import { Lightbulb, Sparkles, Loader2, Check } from 'lucide-react'
 import { AIOutputPanel } from '@/components/modules/AIOutputPanel'
+import { supabase } from '@/lib/supabase'
 
 export default function OffersPage() {
+  const [clients, setClients] = useState<{id: string, name: string}[]>([])
+  const [clientId, setClientId] = useState('')
+  const [saving, setSaving] = useState(false)
+  const [saved, setSaved] = useState(false)
   const [form, setForm] = useState({
     brand_name: '', offer_name: '', target_avatar: '',
     core_problem: '', core_result: '', price: '', currency: 'USD',
@@ -12,6 +17,13 @@ export default function OffersPage() {
   })
   const [output, setOutput] = useState('')
   const [loading, setLoading] = useState(false)
+
+  useEffect(() => {
+    supabase.from('clients').select('id, name').order('created_at').then(({ data }) => {
+      if (data) setClients(data)
+    })
+  }, [])
+
   const u = (k: string, v: string) => setForm(f => ({ ...f, [k]: v }))
 
   const generate = async () => {
@@ -23,6 +35,26 @@ export default function OffersPage() {
       })
       const data = await res.json()
       setOutput(data.result)
+      if (clientId) {
+        setSaving(true)
+        const payload = {
+          client_id: clientId,
+          offer_name: form.offer_name,
+          dream_outcome: form.core_result,
+          target_audience: form.target_avatar,
+          price_point: `${form.price} ${form.currency}`,
+          offer_stack: data.result,
+        }
+        const { data: existing } = await supabase.from('offers').select('id').eq('client_id', clientId).eq('offer_name', form.offer_name).single()
+        if (existing) {
+          await supabase.from('offers').update(payload).eq('id', existing.id)
+        } else {
+          await supabase.from('offers').insert([payload])
+        }
+        setSaving(false)
+        setSaved(true)
+        setTimeout(() => setSaved(false), 2000)
+      }
     } finally { setLoading(false) }
   }
 
@@ -38,6 +70,16 @@ export default function OffersPage() {
         <p style={{ color: '#9494aa', fontSize: 14, margin: 0 }}>
           Stack de valor, garantía, bonos y copy completo. Método Hormozi aplicado a tu oferta.
         </p>
+      </div>
+
+      <div className="card-dark" style={{ padding: 16, marginBottom: 24, display: 'flex', alignItems: 'center', gap: 12 }}>
+        <label style={{ fontSize: 13, color: '#9494aa', whiteSpace: 'nowrap' }}>Cliente:</label>
+        <select value={clientId} onChange={e => setClientId(e.target.value)} style={{ flex: 1 }}>
+          <option value="">— Selecciona un cliente (opcional para guardar) —</option>
+          {clients.map(c => <option key={c.id} value={c.id}>{c.name}</option>)}
+        </select>
+        {saving && <span style={{ fontSize: 12, color: '#9494aa', display: 'flex', alignItems: 'center', gap: 4 }}><Loader2 size={12} /> Guardando...</span>}
+        {saved && <span style={{ fontSize: 12, color: '#10b981', display: 'flex', alignItems: 'center', gap: 4 }}><Check size={12} /> Guardado</span>}
       </div>
 
       <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 24 }}>

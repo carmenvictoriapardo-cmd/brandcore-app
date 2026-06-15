@@ -1,8 +1,9 @@
 'use client'
 
-import { useState } from 'react'
-import { Mic2, Sparkles, Loader2, Plus, X } from 'lucide-react'
+import { useState, useEffect } from 'react'
+import { Mic2, Sparkles, Loader2, Plus, X, Check } from 'lucide-react'
 import { AIOutputPanel } from '@/components/modules/AIOutputPanel'
+import { supabase } from '@/lib/supabase'
 
 const ARCHETYPES = [
   { id: 'hero', label: 'Héroe', desc: 'Valiente, superación, determinación' },
@@ -20,6 +21,10 @@ const ARCHETYPES = [
 ]
 
 export default function VoicePage() {
+  const [clients, setClients] = useState<{id: string, name: string}[]>([])
+  const [clientId, setClientId] = useState('')
+  const [saving, setSaving] = useState(false)
+  const [saved, setSaved] = useState(false)
   const [form, setForm] = useState({
     brand_name: '', industry: '', archetype: 'hero',
     brand_personality: '', communication_style: '',
@@ -30,6 +35,57 @@ export default function VoicePage() {
   const [noInput, setNoInput] = useState('')
   const [output, setOutput] = useState('')
   const [loading, setLoading] = useState(false)
+
+  useEffect(() => {
+    supabase.from('clients').select('id, name').order('created_at').then(({ data }) => {
+      if (data) setClients(data)
+    })
+  }, [])
+
+  useEffect(() => {
+    if (!clientId) return
+    supabase.from('brand_voice').select('*').eq('client_id', clientId).single().then(({ data }) => {
+      if (data) {
+        setForm(f => ({
+          ...f,
+          archetype: data.archetype || 'hero',
+          tone_formal: data.formality || 5,
+          tone_humor: data.humor || 3,
+          tone_bold: data.boldness || 7,
+          tone_inspirational: data.inspiration || 8,
+          yes_words: data.yes_words || [],
+          no_words: data.no_words || [],
+        }))
+        setOutput(data.voice_guide || '')
+      }
+    })
+  }, [clientId])
+
+  const saveToSupabase = async (guide: string) => {
+    if (!clientId) return
+    setSaving(true)
+    const payload = {
+      client_id: clientId,
+      archetype: form.archetype,
+      formality: form.tone_formal,
+      humor: form.tone_humor,
+      boldness: form.tone_bold,
+      inspiration: form.tone_inspirational,
+      yes_words: form.yes_words,
+      no_words: form.no_words,
+      voice_guide: guide,
+      updated_at: new Date().toISOString(),
+    }
+    const { data: existing } = await supabase.from('brand_voice').select('id').eq('client_id', clientId).single()
+    if (existing) {
+      await supabase.from('brand_voice').update(payload).eq('client_id', clientId)
+    } else {
+      await supabase.from('brand_voice').insert([payload])
+    }
+    setSaving(false)
+    setSaved(true)
+    setTimeout(() => setSaved(false), 2000)
+  }
 
   const u = (k: string, v: string | number) => setForm(f => ({ ...f, [k]: v }))
   const addWord = (type: 'yes' | 'no', word: string) => {
@@ -64,6 +120,7 @@ export default function VoicePage() {
       })
       const data = await res.json()
       setOutput(data.result)
+      await saveToSupabase(data.result)
     } finally { setLoading(false) }
   }
 
@@ -79,6 +136,16 @@ export default function VoicePage() {
         <p style={{ color: '#9494aa', fontSize: 14, margin: 0 }}>
           Define el arquetipo, escala de tonos y vocabulario. Genera la guía de voz completa con ejemplos reales por plataforma.
         </p>
+      </div>
+
+      <div className="card-dark" style={{ padding: 16, marginBottom: 24, display: 'flex', alignItems: 'center', gap: 12 }}>
+        <label style={{ fontSize: 13, color: '#9494aa', whiteSpace: 'nowrap' }}>Cliente:</label>
+        <select value={clientId} onChange={e => setClientId(e.target.value)} style={{ flex: 1 }}>
+          <option value="">— Selecciona un cliente —</option>
+          {clients.map(c => <option key={c.id} value={c.id}>{c.name}</option>)}
+        </select>
+        {saving && <span style={{ fontSize: 12, color: '#9494aa', display: 'flex', alignItems: 'center', gap: 4 }}><Loader2 size={12} /> Guardando...</span>}
+        {saved && <span style={{ fontSize: 12, color: '#10b981', display: 'flex', alignItems: 'center', gap: 4 }}><Check size={12} /> Guardado</span>}
       </div>
 
       <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 24 }}>

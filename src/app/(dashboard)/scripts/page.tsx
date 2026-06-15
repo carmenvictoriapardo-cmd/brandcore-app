@@ -1,8 +1,9 @@
 'use client'
 
-import { useState } from 'react'
-import { FileText, Sparkles, Loader2 } from 'lucide-react'
+import { useState, useEffect } from 'react'
+import { FileText, Sparkles, Loader2, Check } from 'lucide-react'
 import { AIOutputPanel } from '@/components/modules/AIOutputPanel'
+import { supabase } from '@/lib/supabase'
 
 const PLATFORMS = ['Instagram Reels', 'TikTok', 'YouTube Shorts', 'YouTube (largo)', 'Podcast', 'Facebook', 'LinkedIn']
 const FORMATS = [
@@ -15,6 +16,10 @@ const FORMATS = [
 ]
 
 export default function ScriptsPage() {
+  const [clients, setClients] = useState<{id: string, name: string}[]>([])
+  const [clientId, setClientId] = useState('')
+  const [saving, setSaving] = useState(false)
+  const [saved, setSaved] = useState(false)
   const [form, setForm] = useState({
     brand_name: '', industry: '', topic: '', platform: 'Instagram Reels',
     format: 'hook_story_cta', duration_seconds: '', tone_notes: '',
@@ -22,6 +27,12 @@ export default function ScriptsPage() {
   })
   const [output, setOutput] = useState('')
   const [loading, setLoading] = useState(false)
+
+  useEffect(() => {
+    supabase.from('clients').select('id, name').order('created_at').then(({ data }) => {
+      if (data) setClients(data)
+    })
+  }, [])
 
   const u = (k: string, v: string) => setForm(f => ({ ...f, [k]: v }))
 
@@ -34,6 +45,18 @@ export default function ScriptsPage() {
       })
       const data = await res.json()
       setOutput(data.result)
+      if (clientId) {
+        setSaving(true)
+        await supabase.from('scripts').insert([{
+          client_id: clientId,
+          platform: form.platform,
+          format: form.format,
+          full_script: data.result,
+        }])
+        setSaving(false)
+        setSaved(true)
+        setTimeout(() => setSaved(false), 2000)
+      }
     } finally { setLoading(false) }
   }
 
@@ -49,6 +72,16 @@ export default function ScriptsPage() {
         <p style={{ color: '#9494aa', fontSize: 14, margin: 0 }}>
           Guiones con hook irresistible, cuerpo que engancha y CTA que convierte. Variaciones A/B incluidas.
         </p>
+      </div>
+
+      <div className="card-dark" style={{ padding: 16, marginBottom: 24, display: 'flex', alignItems: 'center', gap: 12 }}>
+        <label style={{ fontSize: 13, color: '#9494aa', whiteSpace: 'nowrap' }}>Cliente:</label>
+        <select value={clientId} onChange={e => setClientId(e.target.value)} style={{ flex: 1 }}>
+          <option value="">— Selecciona un cliente (opcional para guardar) —</option>
+          {clients.map(c => <option key={c.id} value={c.id}>{c.name}</option>)}
+        </select>
+        {saving && <span style={{ fontSize: 12, color: '#9494aa', display: 'flex', alignItems: 'center', gap: 4 }}><Loader2 size={12} /> Guardando...</span>}
+        {saved && <span style={{ fontSize: 12, color: '#10b981', display: 'flex', alignItems: 'center', gap: 4 }}><Check size={12} /> Guardado</span>}
       </div>
 
       <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 24 }}>
