@@ -1,16 +1,28 @@
 'use client'
 
-import { useState } from 'react'
-import { Search, Sparkles, Loader2 } from 'lucide-react'
+import { useState, useEffect } from 'react'
+import { Search, Sparkles, Loader2, Check } from 'lucide-react'
 import { AIOutputPanel } from '@/components/modules/AIOutputPanel'
+import { supabase } from '@/lib/supabase'
 
 export default function ResearchPage() {
+  const [clients, setClients] = useState<{id: string, name: string}[]>([])
+  const [clientId, setClientId] = useState('')
+  const [saving, setSaving] = useState(false)
+  const [saved, setSaved] = useState(false)
   const [form, setForm] = useState({
     brand_name: '', industry: '', description: '',
     demographics: '', market: 'Latinoamérica', avatar_name: '',
   })
   const [output, setOutput] = useState('')
   const [loading, setLoading] = useState(false)
+
+  useEffect(() => {
+    supabase.from('clients').select('id, name').order('created_at').then(({ data }) => {
+      if (data) setClients(data)
+    })
+  }, [])
+
   const u = (k: string, v: string) => setForm(f => ({ ...f, [k]: v }))
 
   const generate = async () => {
@@ -22,6 +34,19 @@ export default function ResearchPage() {
       })
       const data = await res.json()
       setOutput(data.result)
+      if (clientId) {
+        setSaving(true)
+        const { data: existing } = await supabase.from('audience_research').select('id').eq('client_id', clientId).single()
+        const payload = { client_id: clientId, demographics: form.demographics, competitor_analysis: data.result }
+        if (existing) {
+          await supabase.from('audience_research').update(payload).eq('client_id', clientId)
+        } else {
+          await supabase.from('audience_research').insert([payload])
+        }
+        setSaving(false)
+        setSaved(true)
+        setTimeout(() => setSaved(false), 2000)
+      }
     } finally { setLoading(false) }
   }
 
@@ -37,6 +62,16 @@ export default function ResearchPage() {
         <p style={{ color: '#9494aa', fontSize: 14, margin: 0 }}>
           Avatar profundo, psicografía, voz del cliente, mapa de dolor y objeciones con respuestas. Todo listo para copywriting.
         </p>
+      </div>
+
+      <div className="card-dark" style={{ padding: 16, marginBottom: 24, display: 'flex', alignItems: 'center', gap: 12 }}>
+        <label style={{ fontSize: 13, color: '#9494aa', whiteSpace: 'nowrap' }}>Cliente:</label>
+        <select value={clientId} onChange={e => setClientId(e.target.value)} style={{ flex: 1 }}>
+          <option value="">— Selecciona un cliente (opcional para guardar) —</option>
+          {clients.map(c => <option key={c.id} value={c.id}>{c.name}</option>)}
+        </select>
+        {saving && <span style={{ fontSize: 12, color: '#9494aa', display: 'flex', alignItems: 'center', gap: 4 }}><Loader2 size={12} /> Guardando...</span>}
+        {saved && <span style={{ fontSize: 12, color: '#10b981', display: 'flex', alignItems: 'center', gap: 4 }}><Check size={12} /> Guardado</span>}
       </div>
 
       <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 24 }}>

@@ -1,8 +1,9 @@
 'use client'
 
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import { Sparkles, Loader2, Star, StarOff, ChevronRight, RotateCcw, Check, Zap } from 'lucide-react'
 import { AIOutputPanel } from '@/components/modules/AIOutputPanel'
+import { supabase } from '@/lib/supabase'
 
 type Stage = 'setup' | 'discovery' | 'rounds' | 'refine' | 'final'
 
@@ -14,8 +15,27 @@ interface TaglineOption {
 }
 
 export default function TaglinePage() {
+  const [clients, setClients] = useState<{id: string, name: string}[]>([])
+  const [clientId, setClientId] = useState('')
   const [stage, setStage] = useState<Stage>('setup')
   const [loading, setLoading] = useState(false)
+
+  useEffect(() => {
+    supabase.from('clients').select('id, name').order('created_at').then(({ data }) => {
+      if (data) setClients(data)
+    })
+  }, [])
+
+  const saveTagline = async (taglineText: string, angle: string, analysis: string) => {
+    if (!clientId) return
+    await supabase.from('taglines').insert([{
+      client_id: clientId,
+      tagline: taglineText,
+      angle,
+      final_analysis: analysis,
+      is_selected: true,
+    }])
+  }
 
   // Setup
   const [form, setForm] = useState({
@@ -125,6 +145,8 @@ export default function TaglinePage() {
       const data = await res.json()
       setFinalAnalysis(data.result)
       setStage('final')
+      const angle = allOptions.find(o => o.text === selectedTagline)?.angle || ''
+      await saveTagline(selectedTagline, angle, data.result)
     } finally { setLoading(false) }
   }
 
@@ -143,6 +165,14 @@ export default function TaglinePage() {
         <p style={{ color: '#9494aa', fontSize: 14, margin: 0 }}>
           Descubre el tagline de identidad de tu marca. El que hace que el cliente diga <em>"eso soy yo"</em> — como Think Different o Just Do It.
         </p>
+      </div>
+
+      <div className="card-dark" style={{ padding: 16, marginBottom: 24, display: 'flex', alignItems: 'center', gap: 12 }}>
+        <label style={{ fontSize: 13, color: '#9494aa', whiteSpace: 'nowrap' }}>Cliente:</label>
+        <select value={clientId} onChange={e => setClientId(e.target.value)} style={{ flex: 1 }}>
+          <option value="">— Selecciona un cliente para guardar el tagline —</option>
+          {clients.map(c => <option key={c.id} value={c.id}>{c.name}</option>)}
+        </select>
       </div>
 
       {/* Progress */}

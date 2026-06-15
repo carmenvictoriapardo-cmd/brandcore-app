@@ -1,8 +1,9 @@
 'use client'
 
-import { useState } from 'react'
-import { Megaphone, Sparkles, Loader2 } from 'lucide-react'
+import { useState, useEffect } from 'react'
+import { Megaphone, Sparkles, Loader2, Check } from 'lucide-react'
 import { AIOutputPanel } from '@/components/modules/AIOutputPanel'
+import { supabase } from '@/lib/supabase'
 
 const PLATFORMS_LIST = ['Meta (Facebook + Instagram)', 'TikTok Ads', 'Google Ads', 'LinkedIn Ads', 'YouTube Ads', 'Pinterest Ads']
 const OBJECTIVES = [
@@ -14,6 +15,10 @@ const OBJECTIVES = [
 ]
 
 export default function CampaignsPage() {
+  const [clients, setClients] = useState<{id: string, name: string}[]>([])
+  const [clientId, setClientId] = useState('')
+  const [saving, setSaving] = useState(false)
+  const [saved, setSaved] = useState(false)
   const [form, setForm] = useState({
     brand_name: '', industry: '', objective: 'leads',
     platforms: [] as string[], target_audience: '', budget_range: '',
@@ -22,6 +27,12 @@ export default function CampaignsPage() {
   })
   const [output, setOutput] = useState('')
   const [loading, setLoading] = useState(false)
+
+  useEffect(() => {
+    supabase.from('clients').select('id, name').order('created_at').then(({ data }) => {
+      if (data) setClients(data)
+    })
+  }, [])
 
   const u = (k: string, v: string | string[]) => setForm(f => ({ ...f, [k]: v }))
   const togglePlatform = (p: string) => {
@@ -40,6 +51,21 @@ export default function CampaignsPage() {
       })
       const data = await res.json()
       setOutput(data.result)
+      if (clientId) {
+        setSaving(true)
+        await supabase.from('campaigns').insert([{
+          client_id: clientId,
+          campaign_name: form.offer.slice(0, 80),
+          objective: form.objective,
+          platform: form.platforms.join(', '),
+          budget: form.budget_range,
+          duration: `${form.duration_days} días`,
+          ads: { content: data.result },
+        }])
+        setSaving(false)
+        setSaved(true)
+        setTimeout(() => setSaved(false), 2000)
+      }
     } finally { setLoading(false) }
   }
 
@@ -55,6 +81,16 @@ export default function CampaignsPage() {
         <p style={{ color: '#9494aa', fontSize: 14, margin: 0 }}>
           Campañas completas con 3 conjuntos de ads, variaciones A/B, adaptaciones por red y flujo de retargeting.
         </p>
+      </div>
+
+      <div className="card-dark" style={{ padding: 16, marginBottom: 24, display: 'flex', alignItems: 'center', gap: 12 }}>
+        <label style={{ fontSize: 13, color: '#9494aa', whiteSpace: 'nowrap' }}>Cliente:</label>
+        <select value={clientId} onChange={e => setClientId(e.target.value)} style={{ flex: 1 }}>
+          <option value="">— Selecciona un cliente (opcional para guardar) —</option>
+          {clients.map(c => <option key={c.id} value={c.id}>{c.name}</option>)}
+        </select>
+        {saving && <span style={{ fontSize: 12, color: '#9494aa', display: 'flex', alignItems: 'center', gap: 4 }}><Loader2 size={12} /> Guardando...</span>}
+        {saved && <span style={{ fontSize: 12, color: '#10b981', display: 'flex', alignItems: 'center', gap: 4 }}><Check size={12} /> Guardado</span>}
       </div>
 
       <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 24 }}>
