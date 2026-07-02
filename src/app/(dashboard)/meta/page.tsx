@@ -1,7 +1,7 @@
 'use client'
 
 import { useState, useEffect } from 'react'
-import { BarChart3, Sparkles, Loader2, Link, Check, AlertCircle, Instagram, TrendingUp, Search } from 'lucide-react'
+import { BarChart3, Sparkles, Loader2, Link, Check, AlertCircle, Share2, TrendingUp, Search } from 'lucide-react'
 import { supabase } from '@/lib/supabase'
 import { AIOutputPanel } from '@/components/modules/AIOutputPanel'
 
@@ -150,7 +150,7 @@ export default function MetaAnalysisPage() {
       <div style={{ marginBottom: 32 }}>
         <div style={{ display: 'flex', alignItems: 'center', gap: 10, marginBottom: 6 }}>
           <div style={{ width: 36, height: 36, background: 'linear-gradient(135deg, #833ab420, #fd1d1d20, #fcb04520)', border: '1px solid #833ab440', borderRadius: 10, display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
-            <Instagram size={18} color="#e1306c" />
+            <Share2 size={18} color="#e1306c" />
           </div>
           <h1 style={{ fontSize: 24, fontWeight: 700, margin: 0 }}>Meta Intelligence</h1>
         </div>
@@ -247,7 +247,7 @@ export default function MetaAnalysisPage() {
             ))}
           </div>
           <button className="btn-primary" style={{ justifyContent: 'center', width: '100%' }} onClick={loadInstagramData} disabled={loading || !selectedIgId}>
-            {loading ? <><Loader2 size={14} /> {loadingMsg}</> : <><Instagram size={14} /> Cargar datos de Instagram</>}
+            {loading ? <><Loader2 size={14} /> {loadingMsg}</> : <><Share2 size={14} /> Cargar datos de Instagram</>}
           </button>
         </div>
       )}
