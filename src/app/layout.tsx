@@ -1,18 +1,30 @@
 import type { Metadata } from 'next'
-import { Inter } from 'next/font/google'
+import { Poppins, Plus_Jakarta_Sans } from 'next/font/google'
 import './globals.css'
 
-const inter = Inter({ subsets: ['latin'] })
+const poppins = Poppins({
+  subsets: ['latin'],
+  weight: ['400', '500', '600', '700'],
+  variable: '--font-poppins',
+})
+
+const jakarta = Plus_Jakarta_Sans({
+  subsets: ['latin'],
+  weight: ['400', '500', '600', '700'],
+  variable: '--font-jakarta',
+})
 
 export const metadata: Metadata = {
   title: 'BRANDCORE™ — Plataforma de Comunicación de Marca',
-  description: 'Sistema de gestión de comunicación de marca para agencias. StoryBrand, Brand Voice, Guionista, Analytics y más.',
+  description: 'Sistema de gestión de comunicación de marca para agencias.',
 }
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
     <html lang="es" className="h-full">
-      <body className={`${inter.className} h-full antialiased`}>{children}</body>
+      <body className={`${poppins.variable} ${jakarta.variable} h-full antialiased`}>
+        {children}
+      </body>
     </html>
   )
 }

@@ -31,35 +31,39 @@ export function Sidebar() {
 
   return (
     <aside style={{
-      width: 240,
+      width: 248,
       minHeight: '100vh',
-      background: '#0a0a12',
-      borderRight: '1px solid #1e1e30',
+      background: '#ffffff',
+      borderRight: '1px solid #e2e8f0',
       display: 'flex',
       flexDirection: 'column',
-      padding: '24px 12px',
+      padding: '20px 12px',
       position: 'fixed',
-      top: 0,
-      left: 0,
-      bottom: 0,
+      top: 0, left: 0, bottom: 0,
       zIndex: 40,
     }}>
       {/* Logo */}
-      <div style={{ padding: '0 12px 28px' }}>
-        <div style={{ display: 'flex', alignItems: 'center', gap: 8 }}>
+      <div style={{ padding: '4px 12px 28px' }}>
+        <div style={{ display: 'flex', alignItems: 'center', gap: 10 }}>
           <div style={{
-            width: 32, height: 32,
-            background: 'linear-gradient(135deg, #7c3aed, #db2777)',
-            borderRadius: 8,
-            display: 'flex', alignItems: 'center', justifyContent: 'center'
+            width: 36, height: 36,
+            background: 'linear-gradient(135deg, #630ed4, #db2777)',
+            borderRadius: 10,
+            display: 'flex', alignItems: 'center', justifyContent: 'center',
+            boxShadow: '0 4px 12px rgba(99,14,212,0.25)',
           }}>
             <Zap size={18} color="white" />
           </div>
           <div>
-            <div style={{ fontWeight: 700, fontSize: 15, letterSpacing: '-0.3px' }}>
+            <div style={{
+              fontWeight: 700, fontSize: 15,
+              letterSpacing: '-0.3px',
+              color: '#0b1c30',
+              fontFamily: 'var(--font-poppins)',
+            }}>
               BRANDCORE™
             </div>
-            <div style={{ fontSize: 10, color: '#9494aa', marginTop: -2 }}>
+            <div style={{ fontSize: 10, color: '#94a3b8', marginTop: 1, fontWeight: 500 }}>
               North Factory LLC
             </div>
           </div>
@@ -67,11 +71,19 @@ export function Sidebar() {
       </div>
 
       {/* Nav */}
-      <nav style={{ flex: 1, display: 'flex', flexDirection: 'column', gap: 2 }}>
+      <nav style={{ flex: 1, display: 'flex', flexDirection: 'column', gap: 1 }}>
         {navItems.map((item, i) => {
           if ('divider' in item && item.divider) {
             return (
-              <div key={i} style={{ padding: '16px 12px 6px', fontSize: 10, fontWeight: 600, color: '#5a5a7a', letterSpacing: '0.08em', textTransform: 'uppercase' }}>
+              <div key={i} style={{
+                padding: '18px 12px 6px',
+                fontSize: 10,
+                fontWeight: 700,
+                color: '#94a3b8',
+                letterSpacing: '0.08em',
+                textTransform: 'uppercase',
+                fontFamily: 'var(--font-jakarta)',
+              }}>
                 {item.label}
               </div>
             )
@@ -85,7 +97,7 @@ export function Sidebar() {
               href={item.href as string}
               className={`sidebar-link ${isActive ? 'active' : ''}`}
             >
-              <Icon size={16} />
+              <Icon size={15} />
               <span>{item.label}</span>
             </Link>
           )
@@ -93,10 +105,13 @@ export function Sidebar() {
       </nav>
 
       {/* Footer */}
-      <div style={{ padding: '12px', borderTop: '1px solid #1e1e30', marginTop: 16 }}>
-        <div style={{ fontSize: 11, color: '#5a5a7a' }}>
-          BRANDCORE™ v1.0<br />
-          <span style={{ color: '#9494aa' }}>Sistema de Agencia</span>
+      <div style={{
+        padding: '16px 12px 4px',
+        borderTop: '1px solid #e2e8f0',
+        marginTop: 12,
+      }}>
+        <div style={{ fontSize: 11, color: '#94a3b8', fontFamily: 'var(--font-jakarta)' }}>
+          BRANDCORE™ v1.0 &nbsp;·&nbsp; <span style={{ color: '#630ed4', fontWeight: 600 }}>PRO</span>
         </div>
       </div>
     </aside>
