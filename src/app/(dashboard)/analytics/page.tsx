@@ -43,11 +43,11 @@ export default function AnalyticsPage() {
     const p = parseFloat(prev || '0') || 0
     const diff = curr - p
     return (
-      <div style={{ background: '#0a0a12', border: '1px solid #1e1e30', borderRadius: 8, padding: '12px 16px' }}>
-        <div style={{ fontSize: 11, color: '#9494aa', marginBottom: 4 }}>{label}</div>
+      <div style={{ background: '#f8f9ff', border: '1px solid #e2e8f0', borderRadius: 8, padding: '12px 16px' }}>
+        <div style={{ fontSize: 11, color: '#64748b', marginBottom: 4 }}>{label}</div>
         <div style={{ fontSize: 20, fontWeight: 700 }}>{value || '—'}</div>
         {prev && (
-          <div style={{ fontSize: 11, marginTop: 4, display: 'flex', alignItems: 'center', gap: 4, color: diff > 0 ? '#34d399' : diff < 0 ? '#f87171' : '#9494aa' }}>
+          <div style={{ fontSize: 11, marginTop: 4, display: 'flex', alignItems: 'center', gap: 4, color: diff > 0 ? '#34d399' : diff < 0 ? '#f87171' : '#64748b' }}>
             {diff > 0 ? <TrendingUp size={10} /> : diff < 0 ? <TrendingDown size={10} /> : <Minus size={10} />}
             {diff > 0 ? '+' : ''}{diff.toFixed(0)} vs anterior
           </div>
@@ -68,7 +68,7 @@ export default function AnalyticsPage() {
           </div>
           <h1 style={{ fontSize: 24, fontWeight: 700, margin: 0 }}>Analytics Dashboard</h1>
         </div>
-        <p style={{ color: '#9494aa', fontSize: 14, margin: 0 }}>
+        <p style={{ color: '#64748b', fontSize: 14, margin: 0 }}>
           Registra las métricas mensuales de cada red. Compara, evalúa la salud y genera insights accionables.
         </p>
       </div>
@@ -94,8 +94,8 @@ export default function AnalyticsPage() {
           <button key={pl.id} onClick={() => setActive(pl.id)} style={{
             padding: '8px 16px', borderRadius: 8, fontSize: 13, fontWeight: 500,
             background: active === pl.id ? `${pl.color}20` : 'transparent',
-            color: active === pl.id ? pl.color : '#9494aa',
-            border: `1px solid ${active === pl.id ? pl.color + '40' : '#1e1e30'}`,
+            color: active === pl.id ? pl.color : '#64748b',
+            border: `1px solid ${active === pl.id ? pl.color + '40' : '#e2e8f0'}`,
             cursor: 'pointer', display: 'flex', alignItems: 'center', gap: 6
           }}>
             {pl.icon} {pl.label}
@@ -128,8 +128,8 @@ export default function AnalyticsPage() {
         </div>
 
         {/* Score cards */}
-        <div style={{ borderTop: '1px solid #1e1e30', paddingTop: 20 }}>
-          <div style={{ fontSize: 13, color: '#9494aa', marginBottom: 12 }}>Resumen visual</div>
+        <div style={{ borderTop: '1px solid #e2e8f0', paddingTop: 20 }}>
+          <div style={{ fontSize: 13, color: '#64748b', marginBottom: 12 }}>Resumen visual</div>
           <div style={{ display: 'grid', gridTemplateColumns: 'repeat(4, 1fr)', gap: 12 }}>
             <ScoreCard label="Seguidores" value={d.followers || ''} />
             <ScoreCard label="Crecimiento" value={d.followers_growth || ''} />
@@ -144,7 +144,7 @@ export default function AnalyticsPage() {
             <div style={{ fontSize: 13, fontWeight: 600, color: parseFloat(d.engagement_rate) >= 3 ? '#10b981' : parseFloat(d.engagement_rate) >= 1 ? '#f59e0b' : '#f87171' }}>
               {parseFloat(d.engagement_rate) >= 3 ? '🟢 Engagement excelente' : parseFloat(d.engagement_rate) >= 1 ? '🟡 Engagement aceptable — hay oportunidad de mejora' : '🔴 Engagement bajo — acción urgente requerida'}
             </div>
-            <div style={{ fontSize: 12, color: '#9494aa', marginTop: 4 }}>
+            <div style={{ fontSize: 12, color: '#64748b', marginTop: 4 }}>
               Benchmark del sector: {p.id === 'instagram' ? '1-5%' : p.id === 'tiktok' ? '3-9%' : p.id === 'linkedin' ? '2-5%' : '1-4%'}
             </div>
           </div>
@@ -154,7 +154,7 @@ export default function AnalyticsPage() {
       {/* Next steps reminder */}
       <div className="card-dark" style={{ padding: 20, marginTop: 20 }}>
         <div style={{ fontSize: 13, fontWeight: 600, marginBottom: 8 }}>Próximo paso →</div>
-        <p style={{ fontSize: 13, color: '#9494aa', margin: 0 }}>
+        <p style={{ fontSize: 13, color: '#64748b', margin: 0 }}>
           Con los datos ingresados, ve al módulo <strong style={{ color: '#f97316' }}>Asesor de Estrategia</strong> para generar el informe mensual completo con plan de acción y recomendaciones de IA.
         </p>
       </div>

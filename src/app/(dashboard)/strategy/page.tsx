@@ -36,7 +36,7 @@ export default function StrategyPage() {
           </div>
           <h1 style={{ fontSize: 24, fontWeight: 700, margin: 0 }}>Asesor de Estrategia Mensual</h1>
         </div>
-        <p style={{ color: '#9494aa', fontSize: 14, margin: 0 }}>
+        <p style={{ color: '#64748b', fontSize: 14, margin: 0 }}>
           IA analiza los números, el StoryBrand y la voz. Genera informe de estrategia con plan de acción listo para presentar al cliente.
         </p>
       </div>

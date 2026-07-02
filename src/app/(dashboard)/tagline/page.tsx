@@ -162,13 +162,13 @@ export default function TaglinePage() {
           </div>
           <h1 style={{ fontSize: 24, fontWeight: 700, margin: 0 }}>Posicionamiento & Tagline</h1>
         </div>
-        <p style={{ color: '#9494aa', fontSize: 14, margin: 0 }}>
+        <p style={{ color: '#64748b', fontSize: 14, margin: 0 }}>
           Descubre el tagline de identidad de tu marca. El que hace que el cliente diga <em>"eso soy yo"</em> — como Think Different o Just Do It.
         </p>
       </div>
 
       <div className="card-dark" style={{ padding: 16, marginBottom: 24, display: 'flex', alignItems: 'center', gap: 12 }}>
-        <label style={{ fontSize: 13, color: '#9494aa', whiteSpace: 'nowrap' }}>Cliente:</label>
+        <label style={{ fontSize: 13, color: '#64748b', whiteSpace: 'nowrap' }}>Cliente:</label>
         <select value={clientId} onChange={e => setClientId(e.target.value)} style={{ flex: 1 }}>
           <option value="">— Selecciona un cliente para guardar el tagline —</option>
           {clients.map(c => <option key={c.id} value={c.id}>{c.name}</option>)}
@@ -186,9 +186,9 @@ export default function TaglinePage() {
           <div key={s.id} style={{ display: 'flex', alignItems: 'center', gap: 8 }}>
             <div style={{
               padding: '6px 14px', borderRadius: 99, fontSize: 12, fontWeight: 500,
-              background: stage === s.id ? 'linear-gradient(135deg, #7c3aed, #ec4899)' : '#1a1a28',
-              color: stage === s.id ? 'white' : '#9494aa',
-              border: `1px solid ${stage === s.id ? 'transparent' : '#1e1e30'}`,
+              background: stage === s.id ? 'linear-gradient(135deg, #7c3aed, #ec4899)' : '#eff4ff',
+              color: stage === s.id ? 'white' : '#64748b',
+              border: `1px solid ${stage === s.id ? 'transparent' : '#e2e8f0'}`,
             }}>
               {s.label}
             </div>
@@ -202,7 +202,7 @@ export default function TaglinePage() {
         <div style={{ maxWidth: 600 }}>
           <div className="card-dark" style={{ padding: 28 }}>
             <h3 style={{ fontSize: 16, fontWeight: 600, margin: '0 0 6px' }}>¿Para qué marca?</h3>
-            <p style={{ fontSize: 13, color: '#9494aa', margin: '0 0 24px' }}>
+            <p style={{ fontSize: 13, color: '#64748b', margin: '0 0 24px' }}>
               Vamos a encontrar el tagline que captura la identidad de esta marca — no lo que vende, sino lo que representa.
             </p>
             <div style={{ display: 'flex', flexDirection: 'column', gap: 14 }}>
@@ -232,14 +232,14 @@ export default function TaglinePage() {
           <div className="card-dark" style={{ padding: 28 }}>
             <div style={{ marginBottom: 20 }}>
               <h3 style={{ fontSize: 16, fontWeight: 600, margin: '0 0 4px' }}>Preguntas de Descubrimiento</h3>
-              <p style={{ fontSize: 13, color: '#9494aa', margin: 0 }}>
+              <p style={{ fontSize: 13, color: '#64748b', margin: 0 }}>
                 Responde desde lo más honesto. No hay respuesta correcta. De aquí nace el tagline.
               </p>
             </div>
             <div style={{ display: 'flex', flexDirection: 'column', gap: 20 }}>
               {questions.map((q, i) => (
                 <div key={i}>
-                  <label style={{ fontSize: 14, color: '#f8f8fc', marginBottom: 8 }}>{i + 1}. {q}</label>
+                  <label style={{ fontSize: 14, color: '#0b1c30', marginBottom: 8 }}>{i + 1}. {q}</label>
                   <textarea
                     placeholder="Tu respuesta honesta..."
                     value={answers[i] || ''}
@@ -269,7 +269,7 @@ export default function TaglinePage() {
             <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: 16 }}>
               <div>
                 <h3 style={{ fontSize: 16, fontWeight: 600, margin: '0 0 2px' }}>Ronda {round} — Opciones</h3>
-                <p style={{ fontSize: 12, color: '#9494aa', margin: 0 }}>Marca con ⭐ las que resuenan. Luego damos feedback para ir más profundo.</p>
+                <p style={{ fontSize: 12, color: '#64748b', margin: 0 }}>Marca con ⭐ las que resuenan. Luego damos feedback para ir más profundo.</p>
               </div>
             </div>
 
@@ -280,17 +280,17 @@ export default function TaglinePage() {
                   onClick={() => toggleStar(opt)}
                   style={{
                     padding: '16px 20px', borderRadius: 10, cursor: 'pointer',
-                    background: isStarred(opt.text) ? 'linear-gradient(135deg, #7c3aed10, #ec487910)' : '#0f0f1a',
-                    border: `1px solid ${isStarred(opt.text) ? '#7c3aed40' : '#1e1e30'}`,
+                    background: isStarred(opt.text) ? 'linear-gradient(135deg, #7c3aed10, #ec487910)' : '#ffffff',
+                    border: `1px solid ${isStarred(opt.text) ? '#7c3aed40' : '#e2e8f0'}`,
                     transition: 'all 0.15s',
                     display: 'flex', alignItems: 'flex-start', justifyContent: 'space-between', gap: 12
                   }}
                 >
                   <div style={{ flex: 1 }}>
-                    <div style={{ fontSize: 20, fontWeight: 700, marginBottom: 4, color: isStarred(opt.text) ? '#a78bfa' : '#f8f8fc', fontStyle: 'italic' }}>
+                    <div style={{ fontSize: 20, fontWeight: 700, marginBottom: 4, color: isStarred(opt.text) ? '#a78bfa' : '#0b1c30', fontStyle: 'italic' }}>
                       "{opt.text}"
                     </div>
-                    <div style={{ fontSize: 12, color: '#9494aa' }}>{opt.angle}</div>
+                    <div style={{ fontSize: 12, color: '#64748b' }}>{opt.angle}</div>
                   </div>
                   <div style={{ flexShrink: 0, marginTop: 2 }}>
                     {isStarred(opt.text)
@@ -327,7 +327,7 @@ export default function TaglinePage() {
               </div>
 
               {starred.length === 0 ? (
-                <p style={{ fontSize: 12, color: '#5a5a7a' }}>Haz clic en una opción para marcarla como favorita</p>
+                <p style={{ fontSize: 12, color: '#94a3b8' }}>Haz clic en una opción para marcarla como favorita</p>
               ) : (
                 <div style={{ display: 'flex', flexDirection: 'column', gap: 8, marginBottom: 16 }}>
                   {starred.map(o => (
@@ -336,12 +336,12 @@ export default function TaglinePage() {
                       onClick={() => setSelectedTagline(o.text)}
                       style={{
                         padding: '10px 12px', borderRadius: 8, cursor: 'pointer',
-                        background: selectedTagline === o.text ? '#7c3aed20' : '#0a0a12',
-                        border: `1px solid ${selectedTagline === o.text ? '#7c3aed50' : '#1e1e30'}`,
+                        background: selectedTagline === o.text ? '#7c3aed20' : '#f8f9ff',
+                        border: `1px solid ${selectedTagline === o.text ? '#7c3aed50' : '#e2e8f0'}`,
                       }}
                     >
-                      <div style={{ fontSize: 14, fontWeight: 600, color: selectedTagline === o.text ? '#a78bfa' : '#f8f8fc', fontStyle: 'italic' }}>"{o.text}"</div>
-                      <div style={{ fontSize: 10, color: '#9494aa', marginTop: 2 }}>Ronda {o.round}</div>
+                      <div style={{ fontSize: 14, fontWeight: 600, color: selectedTagline === o.text ? '#a78bfa' : '#0b1c30', fontStyle: 'italic' }}>"{o.text}"</div>
+                      <div style={{ fontSize: 10, color: '#64748b', marginTop: 2 }}>Ronda {o.round}</div>
                     </div>
                   ))}
                 </div>
@@ -371,7 +371,7 @@ export default function TaglinePage() {
             background: 'linear-gradient(135deg, #7c3aed10, #ec487910)',
             border: '1px solid #7c3aed30', borderRadius: 16, marginBottom: 24
           }}>
-            <div style={{ fontSize: 11, letterSpacing: '0.15em', color: '#9494aa', marginBottom: 12, textTransform: 'uppercase' }}>
+            <div style={{ fontSize: 11, letterSpacing: '0.15em', color: '#64748b', marginBottom: 12, textTransform: 'uppercase' }}>
               {form.brand_name} — Tagline de Identidad
             </div>
             <div className="gradient-text" style={{ fontSize: 48, fontWeight: 800, fontStyle: 'italic', lineHeight: 1.2 }}>

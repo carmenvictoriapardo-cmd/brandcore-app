@@ -59,18 +59,18 @@ export default function ResearchPage() {
           </div>
           <h1 style={{ fontSize: 24, fontWeight: 700, margin: 0 }}>Investigador de Clientes</h1>
         </div>
-        <p style={{ color: '#9494aa', fontSize: 14, margin: 0 }}>
+        <p style={{ color: '#64748b', fontSize: 14, margin: 0 }}>
           Avatar profundo, psicografía, voz del cliente, mapa de dolor y objeciones con respuestas. Todo listo para copywriting.
         </p>
       </div>
 
       <div className="card-dark" style={{ padding: 16, marginBottom: 24, display: 'flex', alignItems: 'center', gap: 12 }}>
-        <label style={{ fontSize: 13, color: '#9494aa', whiteSpace: 'nowrap' }}>Cliente:</label>
+        <label style={{ fontSize: 13, color: '#64748b', whiteSpace: 'nowrap' }}>Cliente:</label>
         <select value={clientId} onChange={e => setClientId(e.target.value)} style={{ flex: 1 }}>
           <option value="">— Selecciona un cliente (opcional para guardar) —</option>
           {clients.map(c => <option key={c.id} value={c.id}>{c.name}</option>)}
         </select>
-        {saving && <span style={{ fontSize: 12, color: '#9494aa', display: 'flex', alignItems: 'center', gap: 4 }}><Loader2 size={12} /> Guardando...</span>}
+        {saving && <span style={{ fontSize: 12, color: '#64748b', display: 'flex', alignItems: 'center', gap: 4 }}><Loader2 size={12} /> Guardando...</span>}
         {saved && <span style={{ fontSize: 12, color: '#10b981', display: 'flex', alignItems: 'center', gap: 4 }}><Check size={12} /> Guardado</span>}
       </div>
 

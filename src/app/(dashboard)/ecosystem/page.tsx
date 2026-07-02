@@ -31,7 +31,7 @@ const TYPE_CONFIG: Record<BranchType, { label: string; color: string; emoji: str
   agency:   { label: 'Agencia',       color: '#f59e0b', emoji: '🏢' },
   book:     { label: 'Libro',         color: '#10b981', emoji: '📚' },
   podcast:  { label: 'Podcast',       color: '#f97316', emoji: '🎙️' },
-  other:    { label: 'Otro',          color: '#9494aa', emoji: '💡' },
+  other:    { label: 'Otro',          color: '#64748b', emoji: '💡' },
 }
 
 const DEFAULT_MODULES = (name: string): ModuleStatus[] => [
@@ -141,7 +141,7 @@ export default function EcosystemPage() {
 
   const CoherenceBadge = ({ score }: { score?: number }) => {
     if (score === undefined) return (
-      <span style={{ fontSize: 10, color: '#9494aa', padding: '2px 8px', borderRadius: 99, background: '#1a1a28', border: '1px solid #1e1e30' }}>
+      <span style={{ fontSize: 10, color: '#64748b', padding: '2px 8px', borderRadius: 99, background: '#eff4ff', border: '1px solid #e2e8f0' }}>
         Sin evaluar
       </span>
     )
@@ -165,7 +165,7 @@ export default function EcosystemPage() {
               </div>
               <h1 style={{ fontSize: 24, fontWeight: 700, margin: 0 }}>Ecosistema de Marca</h1>
             </div>
-            <p style={{ color: '#9494aa', fontSize: 14, margin: 0 }}>
+            <p style={{ color: '#64748b', fontSize: 14, margin: 0 }}>
               Todas tus marcas y sub-marcas en un solo mapa. La raíz alimenta cada rama.
             </p>
           </div>
@@ -199,7 +199,7 @@ export default function EcosystemPage() {
                 {INITIAL_ROOT.tagline && (
                   <div style={{ fontSize: 16, fontStyle: 'italic', color: '#a78bfa', marginTop: 2 }}>"{INITIAL_ROOT.tagline}"</div>
                 )}
-                <div style={{ fontSize: 13, color: '#9494aa', marginTop: 4 }}>{INITIAL_ROOT.description}</div>
+                <div style={{ fontSize: 13, color: '#64748b', marginTop: 4 }}>{INITIAL_ROOT.description}</div>
               </div>
               <div style={{ display: 'flex', gap: 8 }}>
                 <Link href="/tagline" style={{ textDecoration: 'none' }}>
@@ -218,10 +218,10 @@ export default function EcosystemPage() {
 
           {/* Connection line */}
           <div style={{ display: 'flex', justifyContent: 'center', marginBottom: 8 }}>
-            <div style={{ width: 2, height: 24, background: 'linear-gradient(to bottom, #7c3aed50, #1e1e30)' }} />
+            <div style={{ width: 2, height: 24, background: 'linear-gradient(to bottom, #7c3aed50, #e2e8f0)' }} />
           </div>
           <div style={{ display: 'flex', justifyContent: 'center', marginBottom: 24 }}>
-            <div style={{ height: 2, background: 'linear-gradient(to right, #1e1e30, #7c3aed50, #1e1e30)', width: `${Math.min(branches.length * 180, 800)}px` }} />
+            <div style={{ height: 2, background: 'linear-gradient(to right, #e2e8f0, #7c3aed50, #e2e8f0)', width: `${Math.min(branches.length * 180, 800)}px` }} />
           </div>
 
           {/* BRANCH NODES */}
@@ -236,8 +236,8 @@ export default function EcosystemPage() {
                   key={branch.id}
                   onClick={() => setSelected(isSelected ? null : branch)}
                   style={{
-                    background: isSelected ? `${branch.color}15` : '#0f0f1a',
-                    border: `2px solid ${isSelected ? branch.color + '60' : '#1e1e30'}`,
+                    background: isSelected ? `${branch.color}15` : '#ffffff',
+                    border: `2px solid ${isSelected ? branch.color + '60' : '#e2e8f0'}`,
                     borderRadius: 14, padding: 20, cursor: 'pointer',
                     transition: 'all 0.2s', position: 'relative'
                   }}
@@ -257,19 +257,19 @@ export default function EcosystemPage() {
                     <CoherenceBadge score={branch.coherenceScore} />
                   </div>
 
-                  <div style={{ fontSize: 14, fontWeight: 700, marginBottom: 2, color: '#f8f8fc' }}>{branch.name}</div>
+                  <div style={{ fontSize: 14, fontWeight: 700, marginBottom: 2, color: '#0b1c30' }}>{branch.name}</div>
                   {branch.tagline && (
                     <div style={{ fontSize: 11, fontStyle: 'italic', color: branch.color, marginBottom: 4 }}>"{branch.tagline}"</div>
                   )}
-                  <div style={{ fontSize: 11, color: '#9494aa', marginBottom: 12, lineHeight: 1.4 }}>{branch.description}</div>
+                  <div style={{ fontSize: 11, color: '#64748b', marginBottom: 12, lineHeight: 1.4 }}>{branch.description}</div>
 
                   {/* Progress bar */}
                   <div style={{ marginBottom: 8 }}>
                     <div style={{ display: 'flex', justifyContent: 'space-between', marginBottom: 4 }}>
-                      <span style={{ fontSize: 10, color: '#9494aa' }}>Módulos completados</span>
+                      <span style={{ fontSize: 10, color: '#64748b' }}>Módulos completados</span>
                       <span style={{ fontSize: 10, fontWeight: 600, color: branch.color }}>{pct}%</span>
                     </div>
-                    <div style={{ height: 4, background: '#1e1e30', borderRadius: 2 }}>
+                    <div style={{ height: 4, background: '#e2e8f0', borderRadius: 2 }}>
                       <div style={{ height: 4, borderRadius: 2, background: `linear-gradient(90deg, ${branch.color}, ${branch.color}80)`, width: `${pct}%`, transition: 'width 0.5s' }} />
                     </div>
                   </div>
@@ -285,31 +285,31 @@ export default function EcosystemPage() {
             <div
               onClick={() => setShowAdd(true)}
               style={{
-                background: 'transparent', border: '2px dashed #1e1e30',
+                background: 'transparent', border: '2px dashed #e2e8f0',
                 borderRadius: 14, padding: 20, cursor: 'pointer',
                 display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center',
                 gap: 8, minHeight: 160, transition: 'all 0.2s',
                 position: 'relative'
               }}
             >
-              <div style={{ position: 'absolute', top: -16, left: '50%', transform: 'translateX(-50%)', width: 2, height: 16, background: '#1e1e30' }} />
+              <div style={{ position: 'absolute', top: -16, left: '50%', transform: 'translateX(-50%)', width: 2, height: 16, background: '#e2e8f0' }} />
               <Plus size={20} color="#2a2a3a" />
-              <span style={{ fontSize: 12, color: '#5a5a7a' }}>Nueva rama</span>
+              <span style={{ fontSize: 12, color: '#94a3b8' }}>Nueva rama</span>
             </div>
           </div>
 
           {/* Coherence legend */}
-          <div style={{ marginTop: 32, padding: 16, background: '#0a0a12', border: '1px solid #1e1e30', borderRadius: 10, display: 'flex', gap: 24, flexWrap: 'wrap' }}>
-            <div style={{ fontSize: 12, color: '#9494aa', fontWeight: 600 }}>Score de coherencia:</div>
+          <div style={{ marginTop: 32, padding: 16, background: '#f8f9ff', border: '1px solid #e2e8f0', borderRadius: 10, display: 'flex', gap: 24, flexWrap: 'wrap' }}>
+            <div style={{ fontSize: 12, color: '#64748b', fontWeight: 600 }}>Score de coherencia:</div>
             {[
               { color: '#10b981', label: '80-100% — Alineada con la raíz' },
               { color: '#f59e0b', label: '60-79% — Ajustes recomendados' },
               { color: '#f87171', label: '0-59% — Desconexión crítica' },
-              { color: '#9494aa', label: 'Sin evaluar — Módulos pendientes' },
+              { color: '#64748b', label: 'Sin evaluar — Módulos pendientes' },
             ].map(l => (
               <div key={l.label} style={{ display: 'flex', alignItems: 'center', gap: 6 }}>
                 <div style={{ width: 8, height: 8, borderRadius: '50%', background: l.color }} />
-                <span style={{ fontSize: 11, color: '#9494aa' }}>{l.label}</span>
+                <span style={{ fontSize: 11, color: '#64748b' }}>{l.label}</span>
               </div>
             ))}
           </div>
@@ -327,21 +327,21 @@ export default function EcosystemPage() {
                     <div style={{ fontSize: 11, color: TYPE_CONFIG[selected.type].color }}>{TYPE_CONFIG[selected.type].label}</div>
                   </div>
                 </div>
-                <button onClick={() => setSelected(null)} style={{ background: 'transparent', border: 'none', cursor: 'pointer', color: '#9494aa' }}>
+                <button onClick={() => setSelected(null)} style={{ background: 'transparent', border: 'none', cursor: 'pointer', color: '#64748b' }}>
                   <X size={16} />
                 </button>
               </div>
 
               {selected.tagline && (
                 <div style={{ padding: '10px 14px', background: `${selected.color}10`, border: `1px solid ${selected.color}20`, borderRadius: 8, marginBottom: 16 }}>
-                  <div style={{ fontSize: 11, color: '#9494aa', marginBottom: 2 }}>Tagline</div>
+                  <div style={{ fontSize: 11, color: '#64748b', marginBottom: 2 }}>Tagline</div>
                   <div style={{ fontSize: 14, fontStyle: 'italic', color: selected.color }}>"{selected.tagline}"</div>
                 </div>
               )}
 
               <CoherenceBadge score={selected.coherenceScore} />
 
-              <div style={{ margin: '20px 0 12px', fontSize: 12, fontWeight: 600, color: '#9494aa' }}>MÓDULOS</div>
+              <div style={{ margin: '20px 0 12px', fontSize: 12, fontWeight: 600, color: '#64748b' }}>MÓDULOS</div>
 
               <div style={{ display: 'flex', flexDirection: 'column', gap: 6 }}>
                 {selected.modules.map(mod => (
@@ -349,19 +349,19 @@ export default function EcosystemPage() {
                     <div style={{
                       display: 'flex', alignItems: 'center', justifyContent: 'space-between',
                       padding: '10px 12px', borderRadius: 8,
-                      background: mod.status === 'done' ? '#10b98110' : mod.status === 'partial' ? '#f59e0b10' : '#0a0a12',
-                      border: `1px solid ${mod.status === 'done' ? '#10b98125' : mod.status === 'partial' ? '#f59e0b25' : '#1e1e30'}`,
+                      background: mod.status === 'done' ? '#10b98110' : mod.status === 'partial' ? '#f59e0b10' : '#f8f9ff',
+                      border: `1px solid ${mod.status === 'done' ? '#10b98125' : mod.status === 'partial' ? '#f59e0b25' : '#e2e8f0'}`,
                       cursor: 'pointer', transition: 'all 0.15s'
                     }}>
                       <div style={{ display: 'flex', alignItems: 'center', gap: 8 }}>
                         <StatusIcon status={mod.status} />
-                        <span style={{ fontSize: 13, color: mod.status === 'pending' ? '#9494aa' : '#f8f8fc' }}>{mod.label}</span>
+                        <span style={{ fontSize: 13, color: mod.status === 'pending' ? '#64748b' : '#0b1c30' }}>{mod.label}</span>
                       </div>
                       <div style={{ display: 'flex', alignItems: 'center', gap: 6 }}>
-                        <span style={{ fontSize: 10, color: mod.status === 'done' ? '#10b981' : mod.status === 'partial' ? '#f59e0b' : '#5a5a7a' }}>
+                        <span style={{ fontSize: 10, color: mod.status === 'done' ? '#10b981' : mod.status === 'partial' ? '#f59e0b' : '#94a3b8' }}>
                           {mod.status === 'done' ? 'Completo' : mod.status === 'partial' ? 'En progreso' : 'Pendiente'}
                         </span>
-                        <ArrowRight size={10} color="#5a5a7a" />
+                        <ArrowRight size={10} color="#94a3b8" />
                       </div>
                     </div>
                   </Link>
@@ -389,7 +389,7 @@ export default function EcosystemPage() {
           <div className="card-dark" style={{ padding: 32, width: 480, borderColor: '#7c3aed40' }}>
             <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: 24 }}>
               <h3 style={{ fontSize: 18, fontWeight: 700, margin: 0 }}>Nueva rama del ecosistema</h3>
-              <button onClick={() => setShowAdd(false)} style={{ background: 'transparent', border: 'none', cursor: 'pointer', color: '#9494aa' }}>
+              <button onClick={() => setShowAdd(false)} style={{ background: 'transparent', border: 'none', cursor: 'pointer', color: '#64748b' }}>
                 <X size={20} />
               </button>
             </div>
@@ -410,12 +410,12 @@ export default function EcosystemPage() {
                       style={{
                         padding: '10px 8px', borderRadius: 8, textAlign: 'center',
                         background: newBranch.type === type ? `${cfg.color}20` : 'transparent',
-                        border: `1px solid ${newBranch.type === type ? cfg.color + '50' : '#1e1e30'}`,
+                        border: `1px solid ${newBranch.type === type ? cfg.color + '50' : '#e2e8f0'}`,
                         cursor: 'pointer'
                       }}
                     >
                       <div style={{ fontSize: 18, marginBottom: 2 }}>{cfg.emoji}</div>
-                      <div style={{ fontSize: 11, color: newBranch.type === type ? cfg.color : '#9494aa', fontWeight: 500 }}>{cfg.label}</div>
+                      <div style={{ fontSize: 11, color: newBranch.type === type ? cfg.color : '#64748b', fontWeight: 500 }}>{cfg.label}</div>
                     </button>
                   ))}
                 </div>

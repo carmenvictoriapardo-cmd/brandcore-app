@@ -102,10 +102,10 @@ export default function VoicePage() {
     <div>
       <label>{label}</label>
       <div style={{ display: 'flex', alignItems: 'center', gap: 10 }}>
-        <span style={{ fontSize: 11, color: '#9494aa', minWidth: 60 }}>{low}</span>
+        <span style={{ fontSize: 11, color: '#64748b', minWidth: 60 }}>{low}</span>
         <input type="range" min={1} max={10} value={form[field] as number} onChange={e => u(field, parseInt(e.target.value))}
           style={{ flex: 1, background: 'transparent', accentColor: '#7c3aed' }} />
-        <span style={{ fontSize: 11, color: '#9494aa', minWidth: 60, textAlign: 'right' }}>{high}</span>
+        <span style={{ fontSize: 11, color: '#64748b', minWidth: 60, textAlign: 'right' }}>{high}</span>
         <span style={{ fontSize: 13, fontWeight: 600, color: '#a78bfa', minWidth: 20 }}>{form[field] as number}</span>
       </div>
     </div>
@@ -133,18 +133,18 @@ export default function VoicePage() {
           </div>
           <h1 style={{ fontSize: 24, fontWeight: 700, margin: 0 }}>Brand Voice & Tono</h1>
         </div>
-        <p style={{ color: '#9494aa', fontSize: 14, margin: 0 }}>
+        <p style={{ color: '#64748b', fontSize: 14, margin: 0 }}>
           Define el arquetipo, escala de tonos y vocabulario. Genera la guía de voz completa con ejemplos reales por plataforma.
         </p>
       </div>
 
       <div className="card-dark" style={{ padding: 16, marginBottom: 24, display: 'flex', alignItems: 'center', gap: 12 }}>
-        <label style={{ fontSize: 13, color: '#9494aa', whiteSpace: 'nowrap' }}>Cliente:</label>
+        <label style={{ fontSize: 13, color: '#64748b', whiteSpace: 'nowrap' }}>Cliente:</label>
         <select value={clientId} onChange={e => setClientId(e.target.value)} style={{ flex: 1 }}>
           <option value="">— Selecciona un cliente —</option>
           {clients.map(c => <option key={c.id} value={c.id}>{c.name}</option>)}
         </select>
-        {saving && <span style={{ fontSize: 12, color: '#9494aa', display: 'flex', alignItems: 'center', gap: 4 }}><Loader2 size={12} /> Guardando...</span>}
+        {saving && <span style={{ fontSize: 12, color: '#64748b', display: 'flex', alignItems: 'center', gap: 4 }}><Loader2 size={12} /> Guardando...</span>}
         {saved && <span style={{ fontSize: 12, color: '#10b981', display: 'flex', alignItems: 'center', gap: 4 }}><Check size={12} /> Guardado</span>}
       </div>
 
@@ -171,11 +171,11 @@ export default function VoicePage() {
                   <button key={a.id} onClick={() => u('archetype', a.id)} style={{
                     padding: '8px 10px', borderRadius: 8, textAlign: 'left',
                     background: form.archetype === a.id ? '#0ea5e920' : 'transparent',
-                    border: `1px solid ${form.archetype === a.id ? '#0ea5e940' : '#1e1e30'}`,
+                    border: `1px solid ${form.archetype === a.id ? '#0ea5e940' : '#e2e8f0'}`,
                     cursor: 'pointer'
                   }}>
-                    <div style={{ fontSize: 12, fontWeight: 600, color: form.archetype === a.id ? '#0ea5e9' : '#f8f8fc' }}>{a.label}</div>
-                    <div style={{ fontSize: 10, color: '#9494aa' }}>{a.desc}</div>
+                    <div style={{ fontSize: 12, fontWeight: 600, color: form.archetype === a.id ? '#0ea5e9' : '#0b1c30' }}>{a.label}</div>
+                    <div style={{ fontSize: 10, color: '#64748b' }}>{a.desc}</div>
                   </button>
                 ))}
               </div>
@@ -191,7 +191,7 @@ export default function VoicePage() {
               <textarea placeholder="Ej: Habla directamente a los problemas del cliente, usa storytelling breve, evita jerga técnica, usa pronombres cercanos (tú/tu)..." value={form.communication_style} onChange={e => u('communication_style', e.target.value)} rows={3} />
             </div>
 
-            <div style={{ borderTop: '1px solid #1e1e30', paddingTop: 14 }}>
+            <div style={{ borderTop: '1px solid #e2e8f0', paddingTop: 14 }}>
               <div style={{ fontSize: 13, fontWeight: 600, marginBottom: 12 }}>Escala de Tonos</div>
               <div style={{ display: 'flex', flexDirection: 'column', gap: 12 }}>
                 <ToneSlider label="Formalidad" field={"tone_formal" as keyof typeof form} low="Muy casual" high="Muy formal" />
@@ -201,7 +201,7 @@ export default function VoicePage() {
               </div>
             </div>
 
-            <div style={{ borderTop: '1px solid #1e1e30', paddingTop: 14 }}>
+            <div style={{ borderTop: '1px solid #e2e8f0', paddingTop: 14 }}>
               <div style={{ fontSize: 13, fontWeight: 600, marginBottom: 12 }}>Vocabulario de Marca</div>
               <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 12 }}>
                 <div>

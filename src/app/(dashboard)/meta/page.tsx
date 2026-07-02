@@ -154,14 +154,14 @@ export default function MetaAnalysisPage() {
           </div>
           <h1 style={{ fontSize: 24, fontWeight: 700, margin: 0 }}>Meta Intelligence</h1>
         </div>
-        <p style={{ color: '#9494aa', fontSize: 14, margin: 0 }}>
+        <p style={{ color: '#64748b', fontSize: 14, margin: 0 }}>
           Conecta la cuenta de Instagram/Facebook de cada cliente. La IA analiza qué funciona, qué no, qué hace la competencia y qué hacer.
         </p>
       </div>
 
       {/* Client selector */}
       <div className="card-dark" style={{ padding: 16, marginBottom: 24, display: 'flex', alignItems: 'center', gap: 12 }}>
-        <label style={{ fontSize: 13, color: '#9494aa', whiteSpace: 'nowrap' }}>Cliente:</label>
+        <label style={{ fontSize: 13, color: '#64748b', whiteSpace: 'nowrap' }}>Cliente:</label>
         <select value={clientId} onChange={e => setClientId(e.target.value)} style={{ flex: 1 }}>
           <option value="">— Selecciona un cliente —</option>
           {clients.map(c => <option key={c.id} value={c.id}>{c.name}</option>)}
@@ -176,7 +176,7 @@ export default function MetaAnalysisPage() {
               <Link size={16} color="#e1306c" />
               <h3 style={{ fontSize: 15, fontWeight: 600, margin: 0 }}>Conectar con Token de Acceso</h3>
             </div>
-            <p style={{ fontSize: 13, color: '#9494aa', margin: '0 0 20px', lineHeight: 1.6 }}>
+            <p style={{ fontSize: 13, color: '#64748b', margin: '0 0 20px', lineHeight: 1.6 }}>
               Obtén un token de acceso de la cuenta de tu cliente desde Meta Business Suite o el Graph API Explorer.
             </p>
             <div style={{ marginBottom: 16 }}>
@@ -210,7 +210,7 @@ export default function MetaAnalysisPage() {
                   <div style={{ width: 22, height: 22, borderRadius: '50%', background: '#7c3aed20', border: '1px solid #7c3aed40', display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: 11, fontWeight: 700, color: '#a78bfa', flexShrink: 0 }}>
                     {s.n}
                   </div>
-                  <p style={{ fontSize: 13, color: '#9494aa', margin: 0, lineHeight: 1.5 }}>{s.text}</p>
+                  <p style={{ fontSize: 13, color: '#64748b', margin: 0, lineHeight: 1.5 }}>{s.text}</p>
                 </div>
               ))}
             </div>
@@ -227,7 +227,7 @@ export default function MetaAnalysisPage() {
       {step === 'select' && (
         <div className="card-dark" style={{ padding: 28, maxWidth: 600 }}>
           <h3 style={{ fontSize: 15, fontWeight: 600, margin: '0 0 6px' }}>✅ Conectado — Selecciona la cuenta de Instagram</h3>
-          <p style={{ fontSize: 13, color: '#9494aa', margin: '0 0 20px' }}>Encontramos {pages.length} página(s) vinculadas a este token.</p>
+          <p style={{ fontSize: 13, color: '#64748b', margin: '0 0 20px' }}>Encontramos {pages.length} página(s) vinculadas a este token.</p>
           <div style={{ display: 'flex', flexDirection: 'column', gap: 10, marginBottom: 20 }}>
             {pages.map((p: any) => (
               <button
@@ -235,12 +235,12 @@ export default function MetaAnalysisPage() {
                 onClick={() => setSelectedIgId(p.instagram_business_account?.id || p.id)}
                 style={{
                   padding: '14px 16px', borderRadius: 10, textAlign: 'left', cursor: 'pointer',
-                  background: selectedIgId === (p.instagram_business_account?.id || p.id) ? '#e1306c15' : '#0f0f1a',
-                  border: `1px solid ${selectedIgId === (p.instagram_business_account?.id || p.id) ? '#e1306c50' : '#1e1e30'}`,
+                  background: selectedIgId === (p.instagram_business_account?.id || p.id) ? '#e1306c15' : '#ffffff',
+                  border: `1px solid ${selectedIgId === (p.instagram_business_account?.id || p.id) ? '#e1306c50' : '#e2e8f0'}`,
                 }}
               >
                 <div style={{ fontSize: 14, fontWeight: 600 }}>{p.name}</div>
-                <div style={{ fontSize: 11, color: '#9494aa', marginTop: 2 }}>
+                <div style={{ fontSize: 11, color: '#64748b', marginTop: 2 }}>
                   {p.instagram_business_account ? '📱 Instagram conectado' : '📄 Solo Facebook Page'} · {p.fan_count?.toLocaleString() || 0} fans
                 </div>
               </button>
@@ -265,7 +265,7 @@ export default function MetaAnalysisPage() {
             ].map(stat => (
               <div key={stat.label} className="card-dark" style={{ padding: 20, textAlign: 'center' }}>
                 <div style={{ fontSize: 24, fontWeight: 700, color: '#e1306c' }}>{stat.value}</div>
-                <div style={{ fontSize: 12, color: '#9494aa', marginTop: 4 }}>{stat.label}</div>
+                <div style={{ fontSize: 12, color: '#64748b', marginTop: 4 }}>{stat.label}</div>
               </div>
             ))}
           </div>
@@ -279,14 +279,14 @@ export default function MetaAnalysisPage() {
               <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: 12 }}>
                 {topPosts.map((post: any) => (
                   <a key={post.id} href={post.permalink} target="_blank" rel="noreferrer" style={{ textDecoration: 'none' }}>
-                    <div style={{ padding: 14, background: '#0a0a12', border: '1px solid #1e1e30', borderRadius: 10, cursor: 'pointer' }}>
-                      <div style={{ fontSize: 11, color: '#9494aa', marginBottom: 6 }}>{post.media_type}</div>
-                      <p style={{ fontSize: 12, color: '#d8d8f0', margin: '0 0 10px', lineHeight: 1.4, overflow: 'hidden', display: '-webkit-box', WebkitLineClamp: 3, WebkitBoxOrient: 'vertical' }}>
+                    <div style={{ padding: 14, background: '#f8f9ff', border: '1px solid #e2e8f0', borderRadius: 10, cursor: 'pointer' }}>
+                      <div style={{ fontSize: 11, color: '#64748b', marginBottom: 6 }}>{post.media_type}</div>
+                      <p style={{ fontSize: 12, color: '#1e293b', margin: '0 0 10px', lineHeight: 1.4, overflow: 'hidden', display: '-webkit-box', WebkitLineClamp: 3, WebkitBoxOrient: 'vertical' }}>
                         {post.caption || '[Sin caption]'}
                       </p>
                       <div style={{ display: 'flex', gap: 12 }}>
                         <span style={{ fontSize: 11, color: '#e1306c' }}>❤️ {post.like_count || 0}</span>
-                        <span style={{ fontSize: 11, color: '#9494aa' }}>💬 {post.comments_count || 0}</span>
+                        <span style={{ fontSize: 11, color: '#64748b' }}>💬 {post.comments_count || 0}</span>
                       </div>
                     </div>
                   </a>
@@ -300,7 +300,7 @@ export default function MetaAnalysisPage() {
             <h3 style={{ fontSize: 15, fontWeight: 600, margin: '0 0 8px', display: 'flex', alignItems: 'center', gap: 6 }}>
               <Search size={15} color="#f59e0b" /> Analizar Competencia (Meta Ads Library)
             </h3>
-            <p style={{ fontSize: 13, color: '#9494aa', margin: '0 0 14px' }}>
+            <p style={{ fontSize: 13, color: '#64748b', margin: '0 0 14px' }}>
               Escribe los nombres de 1-3 competidores separados por coma. Buscaremos sus anuncios activos.
             </p>
             <div style={{ display: 'flex', gap: 10 }}>
@@ -339,7 +339,7 @@ export default function MetaAnalysisPage() {
           {loading && (
             <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', padding: 60, gap: 16 }}>
               <Loader2 size={32} color="#e1306c" style={{ animation: 'spin 1s linear infinite' }} />
-              <p style={{ color: '#9494aa', fontSize: 14 }}>{loadingMsg}</p>
+              <p style={{ color: '#64748b', fontSize: 14 }}>{loadingMsg}</p>
             </div>
           )}
           {analysis && (
@@ -353,7 +353,7 @@ export default function MetaAnalysisPage() {
                 ].map(stat => (
                   <div key={stat.label} className="card-dark" style={{ padding: 16, textAlign: 'center' }}>
                     <div style={{ fontSize: 20, fontWeight: 700, color: '#e1306c' }}>{stat.value}</div>
-                    <div style={{ fontSize: 11, color: '#9494aa', marginTop: 4 }}>{stat.label}</div>
+                    <div style={{ fontSize: 11, color: '#64748b', marginTop: 4 }}>{stat.label}</div>
                   </div>
                 ))}
               </div>

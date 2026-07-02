@@ -83,7 +83,7 @@ export default function ClientsPage() {
               </div>
               <h1 style={{ fontSize: 24, fontWeight: 700, margin: 0 }}>Clientes</h1>
             </div>
-            <p style={{ color: '#9494aa', fontSize: 14, margin: 0 }}>
+            <p style={{ color: '#64748b', fontSize: 14, margin: 0 }}>
               Gestiona todos tus clientes. Cada uno con su propio workspace de 9 módulos.
             </p>
           </div>
@@ -97,7 +97,7 @@ export default function ClientsPage() {
         <div className="card-dark" style={{ padding: 24, marginBottom: 24, border: '1px solid #7c3aed40' }}>
           <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: 16 }}>
             <h3 style={{ fontSize: 15, fontWeight: 600, margin: 0 }}>Nuevo Cliente</h3>
-            <button onClick={() => setShowNew(false)} style={{ background: 'transparent', border: 'none', cursor: 'pointer', color: '#9494aa' }}>
+            <button onClick={() => setShowNew(false)} style={{ background: 'transparent', border: 'none', cursor: 'pointer', color: '#64748b' }}>
               <X size={18} />
             </button>
           </div>
@@ -134,7 +134,7 @@ export default function ClientsPage() {
       )}
 
       {loading ? (
-        <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', padding: 80, color: '#9494aa' }}>
+        <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', padding: 80, color: '#64748b' }}>
           <Loader2 size={24} style={{ marginRight: 10 }} /> Cargando clientes...
         </div>
       ) : (
@@ -146,7 +146,7 @@ export default function ClientsPage() {
               <div key={client.id} className="module-card" style={{ position: 'relative' }}>
                 <button
                   onClick={() => deleteClient(client.id)}
-                  style={{ position: 'absolute', top: 12, right: 12, background: 'transparent', border: 'none', cursor: 'pointer', color: '#5a5a7a' }}
+                  style={{ position: 'absolute', top: 12, right: 12, background: 'transparent', border: 'none', cursor: 'pointer', color: '#94a3b8' }}
                   title="Eliminar cliente"
                 >
                   <X size={14} />
@@ -162,7 +162,7 @@ export default function ClientsPage() {
                   </div>
                   <div style={{ flex: 1, paddingRight: 20 }}>
                     <div style={{ fontSize: 14, fontWeight: 600, marginBottom: 2 }}>{client.name}</div>
-                    <div style={{ fontSize: 11, color: '#9494aa' }}>{client.industry}</div>
+                    <div style={{ fontSize: 11, color: '#64748b' }}>{client.industry}</div>
                   </div>
                 </div>
                 <div style={{ display: 'flex', alignItems: 'center', gap: 6, marginBottom: 10 }}>
@@ -173,17 +173,17 @@ export default function ClientsPage() {
                     {TYPE_LABELS[client.type] || client.type}
                   </span>
                   {client.website && (
-                    <span style={{ fontSize: 10, color: '#9494aa' }}>🌐 {client.website}</span>
+                    <span style={{ fontSize: 10, color: '#64748b' }}>🌐 {client.website}</span>
                   )}
                 </div>
                 {client.description && (
-                  <p style={{ fontSize: 12, color: '#9494aa', margin: '0 0 14px', lineHeight: 1.5 }}>
+                  <p style={{ fontSize: 12, color: '#64748b', margin: '0 0 14px', lineHeight: 1.5 }}>
                     {client.description}
                   </p>
                 )}
-                <div style={{ borderTop: '1px solid #1e1e30', paddingTop: 12, display: 'flex', gap: 6, flexWrap: 'wrap' }}>
+                <div style={{ borderTop: '1px solid #e2e8f0', paddingTop: 12, display: 'flex', gap: 6, flexWrap: 'wrap' }}>
                   {['StoryBrand', 'Voz', 'Guión', 'Campaña'].map(mod => (
-                    <span key={mod} style={{ fontSize: 10, padding: '3px 8px', borderRadius: 99, background: '#1a1a28', color: '#9494aa', border: '1px solid #1e1e30' }}>
+                    <span key={mod} style={{ fontSize: 10, padding: '3px 8px', borderRadius: 99, background: '#eff4ff', color: '#64748b', border: '1px solid #e2e8f0' }}>
                       {mod}
                     </span>
                   ))}
@@ -195,7 +195,7 @@ export default function ClientsPage() {
       )}
 
       <div style={{ marginTop: 24, padding: 16, background: '#7c3aed10', border: '1px solid #7c3aed20', borderRadius: 10 }}>
-        <p style={{ fontSize: 13, color: '#9494aa', margin: 0 }}>
+        <p style={{ fontSize: 13, color: '#64748b', margin: 0 }}>
           💡 <strong style={{ color: '#a78bfa' }}>Supabase conectado:</strong> Los clientes se guardan automáticamente en la base de datos. Tú y Estefany verán los mismos datos desde cualquier dispositivo.
         </p>
       </div>

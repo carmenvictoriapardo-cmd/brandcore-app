@@ -89,7 +89,7 @@ export default function DashboardPage() {
             Bienvenida, <span className="gradient-text">Carmen</span>
           </h1>
         </div>
-        <p style={{ color: '#9494aa', fontSize: 15, margin: 0 }}>
+        <p style={{ color: '#64748b', fontSize: 15, margin: 0 }}>
           BRANDCORE™ — Tu sistema de comunicación de marca con IA. 8 módulos para transformar cada cliente.
         </p>
       </div>
@@ -104,7 +104,7 @@ export default function DashboardPage() {
         ].map(stat => (
           <div key={stat.label} className="card-dark" style={{ padding: '20px' }}>
             <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: 8 }}>
-              <span style={{ fontSize: 13, color: '#9494aa' }}>{stat.label}</span>
+              <span style={{ fontSize: 13, color: '#64748b' }}>{stat.label}</span>
               <stat.icon size={16} color={stat.color} />
             </div>
             <div style={{ fontSize: 32, fontWeight: 700, color: stat.color }}>{stat.value}</div>
@@ -115,7 +115,7 @@ export default function DashboardPage() {
       {/* Modules grid */}
       <div style={{ marginBottom: 16 }}>
         <h2 style={{ fontSize: 18, fontWeight: 600, margin: '0 0 4px' }}>Módulos de IA</h2>
-        <p style={{ color: '#9494aa', fontSize: 13, margin: 0 }}>Selecciona un cliente y trabaja con cada módulo</p>
+        <p style={{ color: '#64748b', fontSize: 13, margin: 0 }}>Selecciona un cliente y trabaja con cada módulo</p>
       </div>
 
       <div style={{ display: 'grid', gridTemplateColumns: 'repeat(2, 1fr)', gap: 16 }}>
@@ -140,10 +140,10 @@ export default function DashboardPage() {
                   {mod.badge}
                 </span>
               </div>
-              <h3 style={{ fontSize: 15, fontWeight: 600, margin: '0 0 6px', color: '#f8f8fc' }}>
+              <h3 style={{ fontSize: 15, fontWeight: 600, margin: '0 0 6px', color: '#0b1c30' }}>
                 {mod.title}
               </h3>
-              <p style={{ fontSize: 13, color: '#9494aa', margin: '0 0 16px', lineHeight: 1.5 }}>
+              <p style={{ fontSize: 13, color: '#64748b', margin: '0 0 16px', lineHeight: 1.5 }}>
                 {mod.desc}
               </p>
               <div style={{ display: 'flex', alignItems: 'center', gap: 4, fontSize: 12, color: mod.color }}>
@@ -167,7 +167,7 @@ export default function DashboardPage() {
             {[
               { name: 'North Factory LLC', type: 'Agencia', color: '#7c3aed' },
               { name: 'Carmen Victoria Pardo', type: 'Marca Personal', color: '#ec4899' },
-              { name: 'Cliente 3', type: 'Por configurar', color: '#9494aa' },
+              { name: 'Cliente 3', type: 'Por configurar', color: '#64748b' },
             ].map(c => (
               <div key={c.name} style={{ display: 'flex', alignItems: 'center', gap: 12 }}>
                 <div style={{
@@ -180,10 +180,10 @@ export default function DashboardPage() {
                 </div>
                 <div>
                   <div style={{ fontSize: 14, fontWeight: 500 }}>{c.name}</div>
-                  <div style={{ fontSize: 12, color: '#9494aa' }}>{c.type}</div>
+                  <div style={{ fontSize: 12, color: '#64748b' }}>{c.type}</div>
                 </div>
                 <div style={{ marginLeft: 'auto' }}>
-                  <Star size={14} color="#9494aa" />
+                  <Star size={14} color="#64748b" />
                 </div>
               </div>
             ))}

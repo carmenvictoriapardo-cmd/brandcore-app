@@ -152,7 +152,7 @@ export default function StoryBrandPage() {
       )
       case 4: return (
         <div style={{ display: 'flex', flexDirection: 'column', gap: 16 }}>
-          <p style={{ fontSize: 13, color: '#9494aa', margin: 0 }}>El plan debe ser simple. Máximo 3 pasos que eliminen el miedo de avanzar.</p>
+          <p style={{ fontSize: 13, color: '#64748b', margin: 0 }}>El plan debe ser simple. Máximo 3 pasos que eliminen el miedo de avanzar.</p>
           {[1,2,3].map(n => (
             <div key={n}>
               <label>Paso {n}</label>
@@ -206,19 +206,19 @@ export default function StoryBrandPage() {
           </div>
           <h1 style={{ fontSize: 24, fontWeight: 700, margin: 0 }}>StoryBrand Builder</h1>
         </div>
-        <p style={{ color: '#9494aa', fontSize: 14, margin: 0 }}>
+        <p style={{ color: '#64748b', fontSize: 14, margin: 0 }}>
           Construye el framework de 7 elementos. Genera BrandScript, One-Liner, copy web y emails automáticamente.
         </p>
       </div>
 
       {/* Client selector */}
       <div className="card-dark" style={{ padding: 16, marginBottom: 24, display: 'flex', alignItems: 'center', gap: 12 }}>
-        <label style={{ fontSize: 13, color: '#9494aa', whiteSpace: 'nowrap' }}>Cliente:</label>
+        <label style={{ fontSize: 13, color: '#64748b', whiteSpace: 'nowrap' }}>Cliente:</label>
         <select value={clientId} onChange={e => setClientId(e.target.value)} style={{ flex: 1 }}>
           <option value="">— Selecciona un cliente —</option>
           {clients.map(c => <option key={c.id} value={c.id}>{c.name}</option>)}
         </select>
-        {saving && <span style={{ fontSize: 12, color: '#9494aa', display: 'flex', alignItems: 'center', gap: 4 }}><Loader2 size={12} /> Guardando...</span>}
+        {saving && <span style={{ fontSize: 12, color: '#64748b', display: 'flex', alignItems: 'center', gap: 4 }}><Loader2 size={12} /> Guardando...</span>}
         {saved && <span style={{ fontSize: 12, color: '#10b981', display: 'flex', alignItems: 'center', gap: 4 }}><Check size={12} /> Guardado</span>}
       </div>
 
@@ -233,9 +233,9 @@ export default function StoryBrandPage() {
                 onClick={() => setStep(s.id)}
                 style={{
                   padding: '6px 12px', borderRadius: 99, fontSize: 12, fontWeight: 500,
-                  background: step === s.id ? '#7c3aed' : '#1a1a28',
-                  color: step === s.id ? 'white' : '#9494aa',
-                  border: `1px solid ${step === s.id ? '#7c3aed' : '#1e1e30'}`,
+                  background: step === s.id ? '#7c3aed' : '#eff4ff',
+                  color: step === s.id ? 'white' : '#64748b',
+                  border: `1px solid ${step === s.id ? '#7c3aed' : '#e2e8f0'}`,
                   cursor: 'pointer', transition: 'all 0.15s'
                 }}
               >
@@ -250,7 +250,7 @@ export default function StoryBrandPage() {
               <h2 style={{ fontSize: 18, fontWeight: 600, margin: '0 0 4px' }}>
                 {STEPS[step - 1].title}
               </h2>
-              <p style={{ fontSize: 13, color: '#9494aa', margin: 0 }}>
+              <p style={{ fontSize: 13, color: '#64748b', margin: 0 }}>
                 {STEPS[step - 1].subtitle}
               </p>
             </div>
@@ -296,14 +296,14 @@ export default function StoryBrandPage() {
                   style={{
                     padding: '12px 14px', borderRadius: 8, textAlign: 'left',
                     background: activeOutput === out.id ? '#7c3aed15' : 'transparent',
-                    border: `1px solid ${activeOutput === out.id ? '#7c3aed40' : '#1e1e30'}`,
+                    border: `1px solid ${activeOutput === out.id ? '#7c3aed40' : '#e2e8f0'}`,
                     cursor: 'pointer', transition: 'all 0.15s'
                   }}
                 >
-                  <div style={{ fontSize: 13, fontWeight: 500, color: activeOutput === out.id ? '#a78bfa' : '#f8f8fc' }}>
+                  <div style={{ fontSize: 13, fontWeight: 500, color: activeOutput === out.id ? '#a78bfa' : '#0b1c30' }}>
                     {out.label}
                   </div>
-                  <div style={{ fontSize: 11, color: '#9494aa', marginTop: 2 }}>{out.desc}</div>
+                  <div style={{ fontSize: 11, color: '#64748b', marginTop: 2 }}>{out.desc}</div>
                 </button>
               ))}
             </div>
@@ -321,7 +321,7 @@ export default function StoryBrandPage() {
             {output[activeOutput] && (
               <div style={{ marginTop: 20 }}>
                 <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: 10 }}>
-                  <span style={{ fontSize: 13, color: '#9494aa' }}>Resultado</span>
+                  <span style={{ fontSize: 13, color: '#64748b' }}>Resultado</span>
                   <button
                     className="btn-ghost"
                     style={{ padding: '4px 10px', fontSize: 12 }}
@@ -331,8 +331,8 @@ export default function StoryBrandPage() {
                   </button>
                 </div>
                 <div style={{
-                  background: '#0a0a12', border: '1px solid #1e1e30', borderRadius: 8,
-                  padding: 16, fontSize: 13, lineHeight: 1.7, color: '#d8d8f0',
+                  background: '#f8f9ff', border: '1px solid #e2e8f0', borderRadius: 8,
+                  padding: 16, fontSize: 13, lineHeight: 1.7, color: '#1e293b',
                   maxHeight: 400, overflowY: 'auto', whiteSpace: 'pre-wrap'
                 }}>
                   {output[activeOutput]}

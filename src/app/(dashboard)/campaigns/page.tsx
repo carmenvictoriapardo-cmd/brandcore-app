@@ -78,18 +78,18 @@ export default function CampaignsPage() {
           </div>
           <h1 style={{ fontSize: 24, fontWeight: 700, margin: 0 }}>Campañas & ADS</h1>
         </div>
-        <p style={{ color: '#9494aa', fontSize: 14, margin: 0 }}>
+        <p style={{ color: '#64748b', fontSize: 14, margin: 0 }}>
           Campañas completas con 3 conjuntos de ads, variaciones A/B, adaptaciones por red y flujo de retargeting.
         </p>
       </div>
 
       <div className="card-dark" style={{ padding: 16, marginBottom: 24, display: 'flex', alignItems: 'center', gap: 12 }}>
-        <label style={{ fontSize: 13, color: '#9494aa', whiteSpace: 'nowrap' }}>Cliente:</label>
+        <label style={{ fontSize: 13, color: '#64748b', whiteSpace: 'nowrap' }}>Cliente:</label>
         <select value={clientId} onChange={e => setClientId(e.target.value)} style={{ flex: 1 }}>
           <option value="">— Selecciona un cliente (opcional para guardar) —</option>
           {clients.map(c => <option key={c.id} value={c.id}>{c.name}</option>)}
         </select>
-        {saving && <span style={{ fontSize: 12, color: '#9494aa', display: 'flex', alignItems: 'center', gap: 4 }}><Loader2 size={12} /> Guardando...</span>}
+        {saving && <span style={{ fontSize: 12, color: '#64748b', display: 'flex', alignItems: 'center', gap: 4 }}><Loader2 size={12} /> Guardando...</span>}
         {saved && <span style={{ fontSize: 12, color: '#10b981', display: 'flex', alignItems: 'center', gap: 4 }}><Check size={12} /> Guardado</span>}
       </div>
 
@@ -116,8 +116,8 @@ export default function CampaignsPage() {
                   <label key={o.id} style={{ display: 'flex', alignItems: 'center', gap: 10, cursor: 'pointer', marginBottom: 0 }}>
                     <input type="radio" name="objective" value={o.id} checked={form.objective === o.id} onChange={e => u('objective', e.target.value)} style={{ width: 'auto' }} />
                     <div>
-                      <div style={{ fontSize: 13, fontWeight: 500, color: '#f8f8fc' }}>{o.label}</div>
-                      <div style={{ fontSize: 11, color: '#9494aa' }}>{o.desc}</div>
+                      <div style={{ fontSize: 13, fontWeight: 500, color: '#0b1c30' }}>{o.label}</div>
+                      <div style={{ fontSize: 11, color: '#64748b' }}>{o.desc}</div>
                     </div>
                   </label>
                 ))}
@@ -134,8 +134,8 @@ export default function CampaignsPage() {
                     style={{
                       padding: '6px 12px', borderRadius: 99, fontSize: 12, fontWeight: 500,
                       background: form.platforms.includes(p) ? '#ec487920' : 'transparent',
-                      color: form.platforms.includes(p) ? '#ec4899' : '#9494aa',
-                      border: `1px solid ${form.platforms.includes(p) ? '#ec487940' : '#1e1e30'}`,
+                      color: form.platforms.includes(p) ? '#ec4899' : '#64748b',
+                      border: `1px solid ${form.platforms.includes(p) ? '#ec487940' : '#e2e8f0'}`,
                       cursor: 'pointer'
                     }}
                   >
@@ -171,8 +171,8 @@ export default function CampaignsPage() {
               <input placeholder="Directo, inspirador, sin rodeos, cercano..." value={form.tone_notes} onChange={e => u('tone_notes', e.target.value)} />
             </div>
 
-            <div style={{ borderTop: '1px solid #1e1e30', paddingTop: 14 }}>
-              <div style={{ fontSize: 12, color: '#9494aa', marginBottom: 10 }}>Contexto StoryBrand (opcional pero recomendado)</div>
+            <div style={{ borderTop: '1px solid #e2e8f0', paddingTop: 14 }}>
+              <div style={{ fontSize: 12, color: '#64748b', marginBottom: 10 }}>Contexto StoryBrand (opcional pero recomendado)</div>
               <div style={{ display: 'flex', flexDirection: 'column', gap: 10 }}>
                 <div>
                   <label>¿Qué quiere el cliente ideal?</label>

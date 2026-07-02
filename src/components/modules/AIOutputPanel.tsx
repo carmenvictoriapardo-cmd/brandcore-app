@@ -34,8 +34,8 @@ export function AIOutputPanel({ output, loading, title = 'Resultado' }: Props) {
         <div style={{ marginBottom: 12 }}>
           <Sparkles size={24} color="#7c3aed" style={{ animation: 'pulse 2s infinite' }} />
         </div>
-        <div style={{ fontSize: 14, color: '#9494aa' }}>Generando con IA...</div>
-        <div style={{ fontSize: 12, color: '#5a5a7a', marginTop: 4 }}>Esto puede tomar unos segundos</div>
+        <div style={{ fontSize: 14, color: '#64748b' }}>Generando con IA...</div>
+        <div style={{ fontSize: 12, color: '#94a3b8', marginTop: 4 }}>Esto puede tomar unos segundos</div>
       </div>
     )
   }
@@ -43,8 +43,8 @@ export function AIOutputPanel({ output, loading, title = 'Resultado' }: Props) {
   if (!output) {
     return (
       <div style={{ padding: 40, textAlign: 'center' }}>
-        <Sparkles size={24} color="#2a2a3a" style={{ marginBottom: 12 }} />
-        <div style={{ fontSize: 14, color: '#5a5a7a' }}>Completa el formulario y genera con IA</div>
+        <Sparkles size={24} color="#94a3b8" style={{ marginBottom: 12 }} />
+        <div style={{ fontSize: 14, color: '#94a3b8' }}>Completa el formulario y genera con IA</div>
       </div>
     )
   }
@@ -52,25 +52,25 @@ export function AIOutputPanel({ output, loading, title = 'Resultado' }: Props) {
   return (
     <div>
       <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: 12 }}>
-        <span style={{ fontSize: 13, color: '#9494aa', fontWeight: 500 }}>{title}</span>
+        <span style={{ fontSize: 13, color: '#64748b', fontWeight: 500 }}>{title}</span>
         <div style={{ display: 'flex', gap: 8 }}>
           <button
             onClick={downloadTxt}
-            style={{ padding: '4px 10px', borderRadius: 6, background: 'transparent', border: '1px solid #1e1e30', color: '#9494aa', cursor: 'pointer', fontSize: 12, display: 'flex', alignItems: 'center', gap: 4 }}
+            style={{ padding: '4px 10px', borderRadius: 6, background: 'transparent', border: '1px solid #e2e8f0', color: '#64748b', cursor: 'pointer', fontSize: 12, display: 'flex', alignItems: 'center', gap: 4 }}
           >
             <Download size={12} /> Descargar
           </button>
           <button
             onClick={copyText}
-            style={{ padding: '4px 10px', borderRadius: 6, background: 'transparent', border: '1px solid #1e1e30', color: '#9494aa', cursor: 'pointer', fontSize: 12, display: 'flex', alignItems: 'center', gap: 4 }}
+            style={{ padding: '4px 10px', borderRadius: 6, background: 'transparent', border: '1px solid #e2e8f0', color: '#64748b', cursor: 'pointer', fontSize: 12, display: 'flex', alignItems: 'center', gap: 4 }}
           >
             {copied ? <><Check size={12} /> Copiado</> : <><Copy size={12} /> Copiar</>}
           </button>
         </div>
       </div>
       <div style={{
-        background: '#0a0a12', border: '1px solid #1e1e30', borderRadius: 10,
-        padding: 20, fontSize: 13, lineHeight: 1.8, color: '#d8d8f0',
+        background: '#f8f9ff', border: '1px solid #e2e8f0', borderRadius: 10,
+        padding: 20, fontSize: 13, lineHeight: 1.8, color: '#1e293b',
         whiteSpace: 'pre-wrap', overflowY: 'auto', maxHeight: 600,
       }}>
         {output}

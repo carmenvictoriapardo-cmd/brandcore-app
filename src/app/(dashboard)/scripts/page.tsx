@@ -69,18 +69,18 @@ export default function ScriptsPage() {
           </div>
           <h1 style={{ fontSize: 24, fontWeight: 700, margin: 0 }}>Guionista Viral</h1>
         </div>
-        <p style={{ color: '#9494aa', fontSize: 14, margin: 0 }}>
+        <p style={{ color: '#64748b', fontSize: 14, margin: 0 }}>
           Guiones con hook irresistible, cuerpo que engancha y CTA que convierte. Variaciones A/B incluidas.
         </p>
       </div>
 
       <div className="card-dark" style={{ padding: 16, marginBottom: 24, display: 'flex', alignItems: 'center', gap: 12 }}>
-        <label style={{ fontSize: 13, color: '#9494aa', whiteSpace: 'nowrap' }}>Cliente:</label>
+        <label style={{ fontSize: 13, color: '#64748b', whiteSpace: 'nowrap' }}>Cliente:</label>
         <select value={clientId} onChange={e => setClientId(e.target.value)} style={{ flex: 1 }}>
           <option value="">— Selecciona un cliente (opcional para guardar) —</option>
           {clients.map(c => <option key={c.id} value={c.id}>{c.name}</option>)}
         </select>
-        {saving && <span style={{ fontSize: 12, color: '#9494aa', display: 'flex', alignItems: 'center', gap: 4 }}><Loader2 size={12} /> Guardando...</span>}
+        {saving && <span style={{ fontSize: 12, color: '#64748b', display: 'flex', alignItems: 'center', gap: 4 }}><Loader2 size={12} /> Guardando...</span>}
         {saved && <span style={{ fontSize: 12, color: '#10b981', display: 'flex', alignItems: 'center', gap: 4 }}><Check size={12} /> Guardado</span>}
       </div>
 
@@ -125,8 +125,8 @@ export default function ScriptsPage() {
                   <label key={f.id} style={{ display: 'flex', alignItems: 'flex-start', gap: 10, cursor: 'pointer', marginBottom: 0 }}>
                     <input type="radio" name="format" value={f.id} checked={form.format === f.id} onChange={e => u('format', e.target.value)} style={{ width: 'auto', marginTop: 3 }} />
                     <div>
-                      <div style={{ fontSize: 13, fontWeight: 500, color: '#f8f8fc' }}>{f.label}</div>
-                      <div style={{ fontSize: 11, color: '#9494aa' }}>{f.desc}</div>
+                      <div style={{ fontSize: 13, fontWeight: 500, color: '#0b1c30' }}>{f.label}</div>
+                      <div style={{ fontSize: 11, color: '#64748b' }}>{f.desc}</div>
                     </div>
                   </label>
                 ))}
