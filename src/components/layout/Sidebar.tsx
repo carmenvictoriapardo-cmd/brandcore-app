@@ -5,7 +5,7 @@ import { usePathname } from 'next/navigation'
 import {
   Users, BookOpen, Mic2, FileText, Lightbulb,
   Search, BarChart3, TrendingUp, Megaphone, LayoutDashboard,
-  Zap, Flame, GitBranch
+  Zap, Flame, GitBranch, Instagram
 } from 'lucide-react'
 
 const navItems = [
@@ -20,6 +20,7 @@ const navItems = [
   { href: '/offers', label: 'Ofertas Irresistibles', icon: Lightbulb },
   { href: '/research', label: 'Investigador de Clientes', icon: Search },
   { href: '/campaigns', label: 'Campañas & ADS', icon: Megaphone },
+  { href: '/meta', label: 'Meta Intelligence', icon: Instagram },
   { divider: true, label: 'Evaluación' },
   { href: '/analytics', label: 'Analytics Dashboard', icon: BarChart3 },
   { href: '/strategy', label: 'Asesor de Estrategia', icon: TrendingUp },
