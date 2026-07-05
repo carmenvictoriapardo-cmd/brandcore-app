@@ -42,6 +42,7 @@ export default function ClientsPage() {
   const [loading, setLoading] = useState(true)
   const [showNew, setShowNew] = useState(false)
   const [saving, setSaving] = useState(false)
+  const [saveError, setSaveError] = useState('')
   const [newClient, setNewClient] = useState({ name: '', industry: '', type: 'business', website: '', description: '' })
 
   useEffect(() => {
@@ -58,11 +59,15 @@ export default function ClientsPage() {
   async function addClient() {
     if (!newClient.name) return
     setSaving(true)
-    const { data, error } = await supabase.from('clients').insert([newClient]).select().single()
+    setSaveError('')
+    const payload = { ...newClient, website: newClient.website || null }
+    const { data, error } = await supabase.from('clients').insert([payload]).select().single()
     if (!error && data) {
       setClients(c => [...c, data])
       setNewClient({ name: '', industry: '', type: 'business', website: '', description: '' })
       setShowNew(false)
+    } else if (error) {
+      setSaveError(`Error: ${error.message} (código: ${error.code})`)
     }
     setSaving(false)
   }
@@ -130,6 +135,11 @@ export default function ClientsPage() {
           <button className="btn-primary" onClick={addClient} disabled={saving}>
             {saving ? <><Loader2 size={14} /> Guardando...</> : 'Agregar Cliente'}
           </button>
+          {saveError && (
+            <div style={{ marginTop: 10, padding: '10px 14px', background: '#fef2f2', border: '1px solid #fca5a5', borderRadius: 8, fontSize: 13, color: '#dc2626' }}>
+              {saveError}
+            </div>
+          )}
         </div>
       )}
 
